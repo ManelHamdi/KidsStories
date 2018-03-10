@@ -34,7 +34,6 @@ public class ControlleurMediascene {
             System.out.println("controlleurmediascene audio : "+audioPage.getContentType());
             System.out.println("controlleurmediascene idc : "+iMedsService.maxIdConte());
             mediascene.setIdConte(iMedsService.maxIdConte());
-            mediascene.setType("t");
 
         // Teste if audio file
             if(typeaudio.equals("audio")){

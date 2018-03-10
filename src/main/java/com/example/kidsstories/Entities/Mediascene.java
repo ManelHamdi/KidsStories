@@ -11,7 +11,6 @@ public class Mediascene {
     private int numOrdre;
     private byte[] img;
     private byte[] audio;
-    private String type;
     private int idConte;
     private Conte conteByIdConte;
 
@@ -66,16 +65,6 @@ public class Mediascene {
     }
 
     @Basic
-    @Column(name = "type", nullable = false, length = 50)
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    @Basic
     @Column(name = "id_conte", nullable = false)
     public int getIdConte() {
         return idConte;
@@ -95,14 +84,13 @@ public class Mediascene {
                 idConte == that.idConte &&
                 Objects.equals(texte, that.texte) &&
                 Arrays.equals(img, that.img) &&
-                Arrays.equals(audio, that.audio) &&
-                Objects.equals(type, that.type);
+                Arrays.equals(audio, that.audio);
     }
 
     @Override
     public int hashCode() {
 
-        int result = Objects.hash(idMediascene, texte, numOrdre, type, idConte);
+        int result = Objects.hash(idMediascene, texte, numOrdre, idConte);
         result = 31 * result + Arrays.hashCode(img);
         result = 31 * result + Arrays.hashCode(audio);
         return result;
