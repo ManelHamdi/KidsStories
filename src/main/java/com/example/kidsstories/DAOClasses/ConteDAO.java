@@ -22,11 +22,13 @@ public class ConteDAO extends GenericDAO<Conte,Integer> implements IConteDAO {
     }
 
     @Override
-    public int maxIdAdmin() {
+    public int maxIdAdmin(String nom, String pass) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         System.out.println("contedao");
-        Administrateur admin = (Administrateur) session.createQuery("FROM Administrateur order by idAdmin desc ").setMaxResults(1).uniqueResult();
+        Administrateur admin = (Administrateur) session.createQuery("FROM Administrateur ad where ad.nom= :n and ad.password= :p ")
+                .setParameter("n",nom).setParameter("p",pass).uniqueResult();
+        System.out.println("admin cntdao"+admin.getIdAdmin());
         session.getTransaction().commit();
         System.out.println("contedao"+admin.getIdAdmin());
         return admin.getIdAdmin();

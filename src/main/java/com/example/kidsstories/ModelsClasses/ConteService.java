@@ -27,7 +27,7 @@ public class ConteService implements IConteService {
     }
 
     @Override
-    public int maxIdAdmin() {
-        return iConteDAO.maxIdAdmin();
+    public int maxIdAdmin(String nom, String pass) {
+        return iConteDAO.maxIdAdmin(nom,pass);
     }
 }

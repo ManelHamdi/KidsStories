@@ -7,5 +7,5 @@ import java.util.List;
 public interface IConteService {
     public List<Conte> getListconte();
     public Boolean ajouter(Conte conte);
-    public int maxIdAdmin();
+    public int maxIdAdmin(String nom, String pass);
 }

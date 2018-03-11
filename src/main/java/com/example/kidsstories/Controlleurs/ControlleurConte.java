@@ -14,19 +14,23 @@ public class ControlleurConte {
     @Autowired
     private IConteService iConteService;
 
-    @GetMapping("/")
+    @GetMapping("/Conte")
     public String ajouterC(){
         return "Conte/AjouterConte";
     }
 
-    @PostMapping("/")
-    public String AjouterConte(@RequestParam String titre, @RequestParam MultipartFile imgCnt, ModelMap modelMap){
+    @PostMapping("/Conte")
+    public String AjouterConte(@RequestParam String titre,
+                               @RequestParam MultipartFile imgCnt,
+                               ModelMap modelMap,
+                               @RequestParam String nom,
+                               @RequestParam String pass){
         try {
             Conte conte = new Conte();
             conte.setTitre(titre);
             conte.setImgconte(imgCnt.getBytes());
-            conte.setIdAdmin(iConteService.maxIdAdmin());
-            System.out.println("admin id"+iConteService.maxIdAdmin());
+            conte.setIdAdmin(iConteService.maxIdAdmin(nom,pass));
+            System.out.println("admin id" + iConteService.maxIdAdmin(nom,pass));
             String type = imgCnt.getContentType().split("/")[0];
             String path = imgCnt.getOriginalFilename();
             if(type.equals("image")){
@@ -37,12 +41,13 @@ public class ControlleurConte {
                 return "Conte/AjouterConte";
             }
             System.out.println("get request method " +imgCnt.getContentType());
-            if(iConteService.ajouter(conte)){
+           /* if(iConteService.ajouter(conte)){
                 System.out.println("Ajouter avec succe");
                 return "Conte/AjouterMediascene";
-            }
-            modelMap.put("Erreur", "Verifier Tout les champs il ya un erreur");
-            return "Conte/AjouterConte";
+            }*/
+            return "Conte/AjouterMediascene";
+            /*modelMap.put("Erreur", "Verifier Tout les champs il ya un erreur");
+            return "Conte/AjouterConte";*/
         } catch (Exception e) {
             System.out.println("il ya un erreur contelayoute:"+e);
             modelMap.put("Erreur", e);

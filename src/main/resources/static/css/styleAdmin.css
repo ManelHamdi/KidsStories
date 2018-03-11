@@ -28,7 +28,7 @@ nav.horizontal ul li{	display: inline-block;}/* horizontal menu */
 img{max-width:100%;}
 /*end reset*/
 body {
-    background: url(../images/5.jpg)no-repeat;
+    background: url(../images/5Admin.jpg)no-repeat;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -45,11 +45,11 @@ body {
 }
 .header-w3l h1 {
     font-size: 3.5em;
-    color: #fff2cc;
+    color: #fed867;
     letter-spacing: 4px;
     text-align: center;
     font-weight: 600;
-    text-shadow: 4px 5px 8px #101010;
+    text-shadow: 4px 5px 8px #f2f2f2;
     font-family: 'Tangerine', cursive;
 }
 .header-w3l h1 span {

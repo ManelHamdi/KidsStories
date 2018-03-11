@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="https://www.thymeleaf.org/ ">
+
+<head>
+    <title>Kids Stories</title>
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Portrait Login Form Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements"
+    />
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- Meta tag Keywords -->
+    <!-- css files -->
+    <link rel="stylesheet" href="css/styleAdmin.css" type="text/css" media="all" />
+    <!-- Style-CSS -->
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <!-- Font-Awesome-Icons-CSS -->
+    <!-- //css files -->
+    <!-- online-fonts -->
+    <link href="//fonts.googleapis.com/css?family=Tangerine:400,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+    <!-- //online-fonts -->
+</head>
+
+<body>
+<!--header-->
+<div class="header-w3l"><br/><br/>
+    <h1>
+        <span>K</span>ids
+        <span>S</span>tories</h1>
+</div>
+<!--//header-->
+<div class="main-content-agile">
+    <div class="sub-main-w3">
+        <img src="images/profileAdmin.jpg" alt="" /><br/><br/><br/>
+        <form action="/" method="post">
+            <div class="pom-agile">
+                <span class="fa fa-user-o" aria-hidden="true"></span>
+                <input placeholder="Username" name="nom" class="user" type="text" required="">
+            </div>
+            <div class="pom-agile">
+                <span class="fa fa-key" aria-hidden="true"></span>
+                <input placeholder="Password" name="pass" class="pass" type="password" required="">
+            </div>
+            <h3 th:text="${notExist}"></h3>
+            <div class="right-w3l">
+                <input type="submit" value="Se Connecter">
+                <input type="reset" value="Réinitialiser">
+            </div>
+        </form>
+    </div>
+</div>
+<!--//main-->
+<!--footer-->
+<div class="footer">
+    <p>&copy; 2018 Kids Stories | Hamdi & ouerghi | ISET Rades</a>
+    </p>
+</div>
+<!--//footer-->
+</body>
+
+</html>
