@@ -41,13 +41,12 @@ public class ControlleurConte {
                 return "Conte/AjouterConte";
             }
             System.out.println("get request method " +imgCnt.getContentType());
-           /* if(iConteService.ajouter(conte)){
+            if(iConteService.ajouter(conte)){
                 System.out.println("Ajouter avec succe");
                 return "Conte/AjouterMediascene";
-            }*/
-            return "Conte/AjouterMediascene";
-            /*modelMap.put("Erreur", "Verifier Tout les champs il ya un erreur");
-            return "Conte/AjouterConte";*/
+            }
+            modelMap.put("Erreur", "Verifier Tout les champs il ya un erreur");
+            return "Conte/AjouterConte";
         } catch (Exception e) {
             System.out.println("il ya un erreur contelayoute:"+e);
             modelMap.put("Erreur", e);

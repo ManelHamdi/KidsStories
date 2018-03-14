@@ -25,7 +25,7 @@ public class Mediascene {
     }
 
     @Basic
-    @Column(name = "texte", nullable = false, length = 50)
+    @Column(name = "texte", nullable = false, length = 255)
     public String getTexte() {
         return texte;
     }

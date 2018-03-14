@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class ControlleurMediascene {
@@ -92,7 +93,12 @@ public class ControlleurMediascene {
                 return "Conte/AjouterMediascene";
             }
             if (iMedsService.ajouter(mediascene)){
-                return "Conte/AjouterConte";
+                int idCnt=iMedsService.maxIdConte();
+                List<Mediascene> lstMscene=iMedsService.ListMs(idCnt);
+                modelMap.put("titre",iMedsService.getCntMeds(iMedsService.maxIdConte()).getTitre());
+                modelMap.put("imgCnt",iMedsService.getCntMeds(iMedsService.maxIdConte()).getImgconte());
+                modelMap.put("Listms",lstMscene);
+                return "Conte/ListeConte";
             }
             modelMap.put("Erreur", "Verifier Tout les champs il ya un erreur");
             return "Conte/AjouterMediascene";
