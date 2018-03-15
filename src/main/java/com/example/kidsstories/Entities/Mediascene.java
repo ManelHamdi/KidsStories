@@ -97,7 +97,7 @@ public class Mediascene {
     }
 
     @ManyToOne
-    @JoinColumn(name = "id_conte", referencedColumnName = "id_conte", nullable = false,insertable = false,updatable = false)
+    @JoinColumn(name = "id_conte", referencedColumnName = "id_conte", nullable = false, insertable = false, updatable = false)
     public Conte getConteByIdConte() {
         return conteByIdConte;
     }

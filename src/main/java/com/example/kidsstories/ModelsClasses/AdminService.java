@@ -13,10 +13,6 @@ public class AdminService implements IAdminService {
 
     @Override
     public Boolean auth(String login, String pass) {
-        if(iAdminDao.Teste(login,pass)){
-            return true;
-        }else {
-            return false;
-        }
+        return iAdminDao.Teste(login, pass);
     }
 }

@@ -75,7 +75,7 @@ public class Conte {
     }
 
     @ManyToOne
-    @JoinColumn(name = "idAdmin", referencedColumnName = "idAdmin", nullable = false,insertable = false,updatable = false)
+    @JoinColumn(name = "idAdmin", referencedColumnName = "idAdmin", nullable = false, insertable = false, updatable = false)
     public Administrateur getAdministrateurByIdAdmin() {
         return administrateurByIdAdmin;
     }

@@ -14,8 +14,9 @@
     <title> Kids Stories </title>
     <!-- Meta tag Keywords -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Portrait Login Form Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements"
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords"
+          content="Portrait Login Form Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements"
     />
     <script>
         addEventListener("load", function () {
@@ -28,14 +29,15 @@
     </script>
     <!-- Meta tag Keywords -->
     <!-- css files -->
-    <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all"/>
     <!-- Style-CSS -->
     <link rel="stylesheet" href="css/font-awesome.css">
     <!-- Font-Awesome-Icons-CSS -->
     <!-- //css files -->
     <!-- online-fonts -->
     <link href="//fonts.googleapis.com/css?family=Tangerine:400,700" rel="stylesheet">
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
+          rel="stylesheet">
     <!-- //online-fonts -->
 </head>
 
@@ -51,13 +53,15 @@
 
 <div class="main-content-agile">
     <div class="sub-main-w32">
-        <img th:src="@{'data:image/jpg;base64,' + *{T(org.springframework.util.Base64Utils).encodeToString(imgCnt)}}" width="90" height="90"/>
+        <img th:src="@{'data:image/jpg;base64,' + *{T(org.springframework.util.Base64Utils).encodeToString(imgCnt)}}"
+             width="90" height="90"/>
         <h3 th:text="${titre}"> Tiiittttrreecc </h3>
     </div>
 </div>
 
 <div class="main-content-agile">
     <div class="sub-main-w32">
+
         <table width="100%" border="3">
             <thead>
             <tr height="50px">
@@ -65,21 +69,33 @@
                 <td width="31%">Image</td>
                 <td width="31%">Texte</td>
                 <td width="31%">Audio</td>
-                <td width="31%" > Action </td>
+                <td width="31%"> Action</td>
             <tr>
             </thead>
             <tbody>
             <tr th:each="Meds: ${Listms}">
-                <td width="4%" th:text="${Meds.numOrdre}">numOrd</td>
-                <td width="28%" ><img th:src="@{'data:image/jpg;base64,' + *{T(org.springframework.util.Base64Utils).encodeToString(Meds.img)}}" width="90" height="90"/></td>
-                <td width="28%" th:text="${Meds.texte}">txt</td>
-                <td width="28%" >
-                    <audio controls style="width: 180px;"><source th:src="@{'data:audio/mp3;base64,' + *{T(org.springframework.util.Base64Utils).encodeToString(Meds.audio)}}" type="audio/mpeg">
-                    </audio></td>
-                <td width="35%" >
-                    <button class="btn" style="font-size: 25px;color:blue;cursor: pointer;"><i class="fa fa-edit"></i> </button>
-                    <button class="btn" style="font-size: 30px;color:red;cursor: pointer;"><i class="fa fa-trash"></i> </button>
-                </td>
+                <form action="/Liste" method="post" enctype="multipart/form-data">
+                    <td width="4%" th:text="${Meds.numOrdre}">numOrd</td>
+                    <td><input type="hidden" name="idMedsn" th:value="${Meds.idMediascene}"></td>
+                    <td width="28%"><img
+                            th:src="@{'data:image/jpg;base64,' + *{T(org.springframework.util.Base64Utils).encodeToString(Meds.img)}}"
+                            width="90" height="90"/></td>
+                    <td width="28%" th:text="${Meds.texte}">txt</td>
+                    <td width="28%">
+                        <audio controls style="width: 180px;">
+                            <source th:src="@{'data:audio/mp3;base64,' + *{T(org.springframework.util.Base64Utils).encodeToString(Meds.audio)}}"
+                                    type="audio/mpeg">
+                        </audio>
+                    </td>
+                    <td width="35%">
+                        <button type="submit" name="modifier" class="btn"
+                                style="font-size: 25px;color:blue;cursor: pointer;"><i class="fa fa-edit"></i>
+                        </button>
+                        <button type="submit" name="supprimer" class="btn"
+                                style="font-size: 30px;color:red;cursor: pointer;"><i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </form>
             <tr>
             </tbody>
 
@@ -87,7 +103,7 @@
     </div>
 </div>
 <div class="footer"><br/>
-    <p>&copy; 2518 Kids Stories | Hamdi & ouerghi | ISET Rades</a>
+    <p>&copy; 2018 Kids Stories | Hamdi & Ouerghi | ISET Rades</a>
     </p>
 </div>
 <!--//footer-->

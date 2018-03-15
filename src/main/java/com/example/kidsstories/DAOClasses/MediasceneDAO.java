@@ -14,6 +14,7 @@ import java.util.List;
 public class MediasceneDAO extends GenericDAO<Mediascene, Integer> implements IMediasceneDAO {
 
     private static SessionFactory sessionFactory;
+
     static {
         try {
             sessionFactory = new Configuration().configure().buildSessionFactory();
@@ -29,7 +30,7 @@ public class MediasceneDAO extends GenericDAO<Mediascene, Integer> implements IM
         session.beginTransaction();
         Conte conte = (Conte) session.createQuery("FROM Conte order by idConte desc ").setMaxResults(1).uniqueResult();
         session.getTransaction().commit();
-        System.out.println("mediascenedao "+conte.getIdConte());
+        System.out.println("mediascenedao " + conte.getIdConte());
         return conte.getIdConte();
     }
 
@@ -39,7 +40,7 @@ public class MediasceneDAO extends GenericDAO<Mediascene, Integer> implements IM
         session.beginTransaction();
         Conte conte = (Conte) session.createQuery("FROM Conte order by idConte desc ").setMaxResults(1).uniqueResult();
         session.getTransaction().commit();
-        System.out.println("mediascenedao "+conte.getIdConte());
+        System.out.println("mediascenedao " + conte.getIdConte());
         return conte;
     }
 
@@ -47,8 +48,8 @@ public class MediasceneDAO extends GenericDAO<Mediascene, Integer> implements IM
     public List<Mediascene> ListMs(int idCnt) {
         List<Mediascene> results = null;
         try {
-            Session session = this.sessionFactory.openSession();
-            results = session.createQuery("from Mediascene m where m.idConte = "+idCnt).list();
+            Session session = sessionFactory.openSession();
+            results = session.createQuery("from Mediascene m where m.idConte = " + idCnt).list();
             session.close();
         } catch (Exception ex) {
             System.err.println("Erreur Dans mediascene dao find all ms by idcnt : \n" + ex.getMessage());

@@ -9,9 +9,10 @@ import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ConteDAO extends GenericDAO<Conte,Integer> implements IConteDAO {
+public class ConteDAO extends GenericDAO<Conte, Integer> implements IConteDAO {
 
     private static SessionFactory sessionFactory;
+
     static {
         try {
             sessionFactory = new Configuration().configure().buildSessionFactory();
@@ -27,10 +28,10 @@ public class ConteDAO extends GenericDAO<Conte,Integer> implements IConteDAO {
         session.beginTransaction();
         System.out.println("contedao");
         Administrateur admin = (Administrateur) session.createQuery("FROM Administrateur ad where ad.nom= :n and ad.password= :p ")
-                .setParameter("n",nom).setParameter("p",pass).uniqueResult();
-        System.out.println("admin cntdao"+admin.getIdAdmin());
+                .setParameter("n", nom).setParameter("p", pass).uniqueResult();
+        System.out.println("admin cntdao" + admin.getIdAdmin());
         session.getTransaction().commit();
-        System.out.println("contedao"+admin.getIdAdmin());
+        System.out.println("contedao" + admin.getIdAdmin());
         return admin.getIdAdmin();
     }
 }

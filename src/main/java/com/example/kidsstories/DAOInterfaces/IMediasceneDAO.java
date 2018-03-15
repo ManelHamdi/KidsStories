@@ -5,8 +5,10 @@ import com.example.kidsstories.Entities.Mediascene;
 
 import java.util.List;
 
-public interface IMediasceneDAO extends IGenericDAO<Mediascene,Integer> {
-    public int maxIdConte();
-    public Conte ConteMeds(int Idcnt);
-    public List<Mediascene> ListMs(int idCnt);
+public interface IMediasceneDAO extends IGenericDAO<Mediascene, Integer> {
+    int maxIdConte();
+
+    Conte ConteMeds(int Idcnt);
+
+    List<Mediascene> ListMs(int idCnt);
 }

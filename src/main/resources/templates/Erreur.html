@@ -2,52 +2,60 @@
 <html xmlns:th="https://www.thymeleaf.org/">
 <html>
 <head>
-<title>ERREUR PAGE</title>
-<!-- meta_tags-->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="keywords" content="Falsity Error Page A Flat Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
-	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-	function hideURLbar(){ window.scrollTo(0,1); } </script>
-	<script>
-function goBack() {
-    window.history.back();
-}
-</script>
-<!-- Meta_tag_Keywords -->
-	<link href="css/styleErreur.css" rel="stylesheet" type="text/css" media="all"/><!--stylesheet-->
-	<link rel="stylesheet" href="css/font-awesomeErreur.css"><!--font_wesome_icons-->
-	<link href="//fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet"><!--online_fonts-->
-	<link href="//fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet"><!--online_fonts-->
-	<link href="//fonts.googleapis.com/css?family=Barlow" rel="stylesheet"><!--online_fonts-->
+    <title>ERREUR PAGE</title>
+    <!-- meta_tags-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords"
+          content="Falsity Error Page A Flat Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+    <!-- Meta_tag_Keywords -->
+    <link href="css/styleErreur.css" rel="stylesheet" type="text/css" media="all"/><!--stylesheet-->
+    <link rel="stylesheet" href="css/font-awesomeErreur.css"><!--font_wesome_icons-->
+    <link href="//fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet"><!--online_fonts-->
+    <link href="//fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet"><!--online_fonts-->
+    <link href="//fonts.googleapis.com/css?family=Barlow" rel="stylesheet"><!--online_fonts-->
 </head>
 <body>
-<div class="agileits-main"> 
-		<div class="w3l-head">
-			<h1>Erreur : <label><h3 th:text="${Erreur}"></h3></label></h1>
+<div class="agileits-main">
+    <div class="w3l-head">
+        <h1>Erreur : <label><h3 th:text="${Erreur}" style="color:red"></h3></label></h1>
 
-			<div class="w3l-text">
-			<h2 >
-				<button onclick="goBack()" class="button">Go Back</button> <br>
-				4<span><sub>0</sub></span>4</h2>
-				<p>oops error!</p>
-				<!--<p>Sorry! The page you were  looking for could not be found </p>-->
-				<!--<div class="agile-search"> 
-					<form action="#" method="post">
-						<input type="text" name="Search" placeholder="Enter your search term..." required="">
-						<input type="submit" value="Search">
-					</form> 
-				</div>-->
+        <div class="w3l-text">
+            <h2>
+                <button onclick="goBack()" class="button">Go Back</button>
+                <br>
+                4<span><sub>0</sub></span>4
+            </h2>
+            <p>oops error!</p>
+            <!--<p>Sorry! The page you were  looking for could not be found </p>-->
+            <!--<div class="agile-search">
+                <form action="#" method="post">
+                    <input type="text" name="Search" placeholder="Enter your search term..." required="">
+                    <input type="submit" value="Search">
+                </form>
+            </div>-->
 
-			</div>	
-		</div>
-<!--<div class="w3ls-icons">
-	<ul>
-		<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-		<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-		<li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-	</ul>
-</div>-->
-</div>	
+        </div>
+    </div>
+    <!--<div class="w3ls-icons">
+        <ul>
+            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+            <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+        </ul>
+    </div>-->
+</div>
 </body>
 </html>

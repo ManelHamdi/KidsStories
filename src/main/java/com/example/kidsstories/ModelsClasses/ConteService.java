@@ -20,14 +20,11 @@ public class ConteService implements IConteService {
     }
 
     public Boolean ajouter( /* String titre,imgconte */ Conte conte) {
-      if(iConteDAO.saveBool(conte)){
-          return  true;
-      }
-          return  false;
+        return iConteDAO.saveBool(conte);
     }
 
     @Override
     public int maxIdAdmin(String nom, String pass) {
-        return iConteDAO.maxIdAdmin(nom,pass);
+        return iConteDAO.maxIdAdmin(nom, pass);
     }
 }

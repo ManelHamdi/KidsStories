@@ -94,7 +94,7 @@ public class Question {
     }
 
     @ManyToOne
-    @JoinColumn(name = "id_conte", referencedColumnName = "id_conte", nullable = false,insertable = false,updatable = false)
+    @JoinColumn(name = "id_conte", referencedColumnName = "id_conte", nullable = false, insertable = false, updatable = false)
     public Conte getConteByIdConte() {
         return conteByIdConte;
     }
@@ -104,7 +104,7 @@ public class Question {
     }
 
     @ManyToOne
-    @JoinColumn(name = "idCategories", referencedColumnName = "idCategories", nullable = false,insertable = false,updatable = false)
+    @JoinColumn(name = "idCategories", referencedColumnName = "idCategories", nullable = false, insertable = false, updatable = false)
     public Categories getCategoriesByIdCategories() {
         return categoriesByIdCategories;
     }

@@ -13,161 +13,161 @@ import java.util.List;
 
 
 @Repository
-public abstract class GenericDAO<E,PK extends java.io.Serializable > implements IGenericDAO<E,PK> {
-	
-
-	private static SessionFactory sessionFactory;
-	static {
-		try {
-			sessionFactory = new Configuration().configure().buildSessionFactory();
-		} catch (Exception ex) {
-			System.err.println("Erreur Dans GenericDAO.SessionFactory : \n" + ex.getMessage());
-			ex.printStackTrace();
-		}
-	}
-
-	private Class<E> entityClass;
-
-	//constructors
-	@SuppressWarnings("unchecked")
-	public GenericDAO() {
-		//this.entityClass = (Class<E>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-		ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
-		this.entityClass = (Class<E>) genericSuperclass.getActualTypeArguments()[0];
-	}
-
-	//getters and setters
-	public Class<E> getEntityClass() {
-		return entityClass;
-	}
+public abstract class GenericDAO<E, PK extends java.io.Serializable> implements IGenericDAO<E, PK> {
 
 
-	// CRUD stuff
-	@SuppressWarnings("unchecked")
+    private static SessionFactory sessionFactory;
 
-	public PK save(E newInstance) {
-		PK result = null;
-		try {
-			Session session = this.sessionFactory.openSession();
-			session.beginTransaction();
-			result = (PK) session.save(newInstance);
-			session.getTransaction().commit();
-			session.close();
-		} catch (Exception ex) {
-			System.err.println("Erreur Dans GenericDAO.Save : \n" + ex.getMessage());
-		}
-		return result;
-	}
+    static {
+        try {
+            sessionFactory = new Configuration().configure().buildSessionFactory();
+        } catch (Exception ex) {
+            System.err.println("Erreur Dans GenericDAO.SessionFactory : \n" + ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
 
-	public boolean saveBool(E newInstance)
-	{
-		boolean res = false;
-		Session session = null;
-		try {
-			session = this.sessionFactory.openSession();
-			session.beginTransaction();
-			session.save(newInstance);
-			session.getTransaction().commit();
-			res=true;
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		session.close();
-		return res;
-	}
+    private Class<E> entityClass;
 
-	public boolean update(E transientObject) {
-		try {
-			Session session = this.sessionFactory.openSession();
-			session.beginTransaction();
-			session.update(transientObject);
-			session.getTransaction().commit();
-			session.close();
-			return true;
-		} catch (Exception ex) {
-			System.err.println("Erreur Dans GenericDAO.Update : \n" + ex.getMessage());
-			return false;
-		}
-	}
+    //constructors
+    @SuppressWarnings("unchecked")
+    public GenericDAO() {
+        //this.entityClass = (Class<E>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
+        this.entityClass = (Class<E>) genericSuperclass.getActualTypeArguments()[0];
+    }
+
+    //getters and setters
+    public Class<E> getEntityClass() {
+        return entityClass;
+    }
 
 
-	@SuppressWarnings("unchecked")
-	public void saveOrUpdate(E transientObject) {
+    // CRUD stuff
+    @SuppressWarnings("unchecked")
 
-		try {
-			Session session = this.sessionFactory.openSession();
-			session.beginTransaction();
-			session.saveOrUpdate(transientObject);
-			session.getTransaction().commit();
-			session.close();
-		} catch (Exception ex) {
-			System.err.println("Erreur Dans GenericDAO.saveOrUpdate : \n" + ex.getMessage());
-		}
-	}
+    public PK save(E newInstance) {
+        PK result = null;
+        try {
+            Session session = sessionFactory.openSession();
+            session.beginTransaction();
+            result = (PK) session.save(newInstance);
+            session.getTransaction().commit();
+            session.close();
+        } catch (Exception ex) {
+            System.err.println("Erreur Dans GenericDAO.Save : \n" + ex.getMessage());
+        }
+        return result;
+    }
 
-	@SuppressWarnings("unchecked")
-	public void delete(E persistentObject) {
-		try {
-			Session session = this.sessionFactory.openSession();
-			session.beginTransaction();
-			session.delete(persistentObject);
-			session.getTransaction().commit();
-			session.close();
-		} catch (Exception ex) {
-			System.err.println("Erreur Dans GenericDAO.delete : \n" + ex.getMessage());
-		}
-	}
+    public boolean saveBool(E newInstance) {
+        boolean res = false;
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            session.beginTransaction();
+            session.save(newInstance);
+            session.getTransaction().commit();
+            res = true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        session.close();
+        return res;
+    }
 
-	@SuppressWarnings("unchecked")
-	public List<E> findAll() {
-		List<E> results = null;
-		try {
-			Session session = this.sessionFactory.openSession();
-			Criteria crit = session.createCriteria(getEntityClass());
-			results = crit.list();
-			session.close();
-		} catch (Exception ex) {
-			System.err.println("Erreur Dans GenericDAO.findAll : \n" + ex.getMessage());
-		}
-		return results;
+    public boolean update(E transientObject) {
+        try {
+            Session session = sessionFactory.openSession();
+            session.beginTransaction();
+            session.update(transientObject);
+            session.getTransaction().commit();
+            session.close();
+            return true;
+        } catch (Exception ex) {
+            System.err.println("Erreur Dans GenericDAO.Update : \n" + ex.getMessage());
+            return false;
+        }
+    }
 
-	}
 
-	@SuppressWarnings("unchecked")
-	public List<E> findByCriteria(String propertyName1, Object value1) {
-		List<E> results = null;
-		try {
-			Session session = this.sessionFactory.openSession();
-			results = session.createQuery("from " + getEntityClass().getName() + " u where u." + propertyName1 + " = :one")
-					.setParameter("one", value1)
-					.list();
-			session.close();
-		} catch (Exception ex) {
-			System.err.println("Erreur Dans GenericDAO.findAllBy1Properties : \n" + ex.getMessage());
-		}
-		return results;
-	}
+    @SuppressWarnings("unchecked")
+    public void saveOrUpdate(E transientObject) {
 
-	@SuppressWarnings("unchecked")
-	public E findById(String id) {
-		List<E> results = null;
-		E result = null;
-		try {
-			Session session = this.sessionFactory.openSession();
-			Criteria crit = session.createCriteria(entityClass);
-			crit.add(Restrictions.eq("id", id));
-			results = crit.list();
-			if (!results.isEmpty()) {
-				if (results.size() == 1) {
-					result = results.get(0);
-				}
-			}
-			session.close();
-		} catch (Exception ex) {
-			System.err.println("Erreur Dans GenericDAO.findById : \n" + ex.getMessage());
-		}
-		return result;
-	}
+        try {
+            Session session = sessionFactory.openSession();
+            session.beginTransaction();
+            session.saveOrUpdate(transientObject);
+            session.getTransaction().commit();
+            session.close();
+        } catch (Exception ex) {
+            System.err.println("Erreur Dans GenericDAO.saveOrUpdate : \n" + ex.getMessage());
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public void delete(E persistentObject) {
+        try {
+            Session session = sessionFactory.openSession();
+            session.beginTransaction();
+            session.delete(persistentObject);
+            session.getTransaction().commit();
+            session.close();
+        } catch (Exception ex) {
+            System.err.println("Erreur Dans GenericDAO.delete : \n" + ex.getMessage());
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<E> findAll() {
+        List<E> results = null;
+        try {
+            Session session = sessionFactory.openSession();
+            Criteria crit = session.createCriteria(getEntityClass());
+            results = crit.list();
+            session.close();
+        } catch (Exception ex) {
+            System.err.println("Erreur Dans GenericDAO.findAll : \n" + ex.getMessage());
+        }
+        return results;
+
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<E> findByCriteria(String propertyName1, Object value1) {
+        List<E> results = null;
+        try {
+            Session session = sessionFactory.openSession();
+            results = session.createQuery("from " + getEntityClass().getName() + " u where u." + propertyName1 + " = :one")
+                    .setParameter("one", value1)
+                    .list();
+            session.close();
+        } catch (Exception ex) {
+            System.err.println("Erreur Dans GenericDAO.findAllBy1Properties : \n" + ex.getMessage());
+        }
+        return results;
+    }
+
+    @SuppressWarnings("unchecked")
+    public E findById(String id) {
+        List<E> results = null;
+        E result = null;
+        try {
+            Session session = sessionFactory.openSession();
+            Criteria crit = session.createCriteria(entityClass);
+            crit.add(Restrictions.eq("id", id));
+            results = crit.list();
+            if (!results.isEmpty()) {
+                if (results.size() == 1) {
+                    result = results.get(0);
+                }
+            }
+            session.close();
+        } catch (Exception ex) {
+            System.err.println("Erreur Dans GenericDAO.findById : \n" + ex.getMessage());
+        }
+        return result;
+    }
 
 /*	public Object findBy(Class<?> clazz, Serializable id) {
 	/*	Object obj =null;
