@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="https://www.thymeleaf.org/ ">
+<html>
+<head>
+    <title>Kids Stories</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style first page.css" type="text/css" media="all"/>
+    <script>
+        function myFunction() {
+            var input, filter, ul, li, a, i, b;
+            input = document.getElementById("search2");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("body");
+            li = ul.getElementsByTagName("div");
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("h5")[0];
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+
+                }
+            }
+        }
+    </script>
+
+    <script>
+        function hiddenShow() {
+            var x = document.getElementById("ch");
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+        }
+    </script>
+
+    <script>
+        function ReadFromTxtc() {
+            //Check the support for the File API support
+            var fileSelected = document.getElementById('idFiletxtc');
+            fileSelected.addEventListener('change', function (e) {
+                //Set the extension for the file
+                var fileExtension = /text.*/;
+                //Get the file object
+                var fileTobeRead = fileSelected.files[0];
+                //Check of the extension match
+                if (fileTobeRead.type.match(fileExtension)) {
+                    //Initialize the FileReader object to read the 2file
+                    var fileReader = new FileReader();
+                    fileReader.onload = function (e) {
+                        var textAreaR = document.getElementById('textAreaRc');
+                        textAreaR.innerText = fileReader.result;
+                    };
+                    fileReader.readAsText(fileTobeRead);
+                }
+                else {
+                    alert("Please select text file or we use the old text");
+                }
+
+            }, false);
+
+        }
+    </script>
+
+</head>
+<body class="body2" id="body">
+
+<table width="100%">
+    <tr>
+        <td>
+            <form action="/GererConte" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="idAdmin" th:value="${idAdmin}">
+                <input type="hidden" name="idConte" th:value="${idConte}">
+                <button type="submit" name="index" style="width: 60%;border-radius: 5%;background-color: white"><img
+                        src="images/logo.png" width="100%"></button>
+                <button type="submit" name="logout" style="width: 15%;border-radius: 20%;background-color: white"><img
+                        src="images/logOut.png" width="100%"></button>
+            </form>
+
+        </td>
+        <td rowspan="2" width="70%">
+            <input class="search2" type="text" id="search2" onkeyup="myFunction()"
+                   placeholder="Rechercher Titre Conte..." title="Type in a name"><br/>
+            <table class="tt">
+                <tr>
+                    <td>
+                        <!-- ************************ Liste Conte ******************** -->
+                        <div class="cardm" th:each="lstCnt: ${ListCnt}">
+                            <form action="/GererConte" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="idAdmin" th:value="${idAdmin}">
+                                <input type="hidden" name="idConte" th:value="${lstCnt.idConte}">
+
+                                <img th:src="@{'data:image/jpg;base64,' +
+            *{T(org.springframework.util.Base64Utils).encodeToString(lstCnt.imgconte)}}" style="width:100%">
+                                <h5 th:text="${lstCnt.titre}">titre de conte</h5>
+
+                                <button type="submit" name="gererMs" class="btnAjouterm">Gerer MediaScene</button>
+                                <br/><br/>
+
+                            </form>
+
+                        </div>
+
+
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <!-- ************************ Conte ******************** -->
+            <div class="cardt">
+                <!-- <form action="/GererMs" method="post" enctype="multipart/form-data">
+                     <input type="hidden" name="idAdmin" th:value="${idAdmin}">
+                     <input type="hidden" name="idConte" th:value="${idConte}">-->
+
+                <img th:src="@{'data:image/jpg;base64,' +
+            *{T(org.springframework.util.Base64Utils).encodeToString(img)}}" style="width:100%">
+
+                <h5 th:text="${titre}">titre de Conte</h5>
+
+                <button type="submit" name="ajouMs" class="btnAjoutermt" onclick="hiddenShow()">Nouvelle MediaScene
+                </button>
+                <br/><br/>
+                <form action="/GererConte" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="idConte" th:value="${idConte}">
+                    <input type="hidden" name="idAdmin" th:value="${idAdmin}">
+                    <button type="submit" name="play" class="btnAjoutermt">Play</button>
+                    <br/><br/>
+                </form>
+            </div>
+        </td>
+    </tr>
+</table>
+
+
+<!-- ************** creation de Mediascene *************** -->
+
+
+<div class="cardhidden2" id="ch">
+    <form action="/GererMs" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="idAdmin" th:value="${idAdmin}">
+        <input type="hidden" name="idConte" th:value="${idConte}">
+
+        Choisir un image
+        <input placeholder="Image" name="imgPage" type="file" required="">
+        <br/><br/>
+        Choisir un fichier audio
+        <input placeholder="Audio" name="audioPage" type="file" required="">
+        <br/><br/>
+        <textarea id="textAreaRc" style="height:60px;" placeholder="Texte" name="txtPage" type="text"
+                  required=""></textarea>
+        <i>Ou <input id="idFiletxtc" placeholder="Texte" name="textePage" type="file" onclick="ReadFromTxtc()"></i>
+        <br/>
+        <h3 th:text="${Erreur}" style="color:red"></h3>
+
+        <input class="btnV" type="submit" name="ajouterMs" value="Valider">
+        <input class="btnR" type="reset" name="suivant" value="réinitialiser">
+    </form>
+</div>
+<br/><br/>
+
+
+<!-- ************************ Liste MediaScene ******************** -->
+
+
+<div class="cardi2" th:each="lstMs: ${listMs}">
+
+    <div class="card">
+
+        <form action="/GererMs" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="idMs" th:value="${lstMs.idMediascene}">
+            <input type="hidden" name="idAdmin" th:value="${idAdmin}">
+            <input type="hidden" name="idConte" th:value="${lstMs.idConte}">
+            <!-- **************** Num Page ************ -->
+            <h7 th:text="'Page N° ' + ${lstMs.numOrdre}">Num Page</h7>
+            <!-- **************** image *************** -->
+            <img th:src="@{'data:image/jpg;base64,' +
+            *{T(org.springframework.util.Base64Utils).encodeToString(lstMs.img)}}" style="width:100%">
+            <!-- ***************** Audio ************** -->
+            <audio controls style="width: 180px;">
+                <source th:src="@{'data:audio/mp3;base64,' +
+                *{T(org.springframework.util.Base64Utils).encodeToString(lstMs.audio)}}"
+                        type="audio/mpeg">
+            </audio>
+            <!-- **************** Texte *************** -->
+            <h5 th:text="${lstMs.texte}">texte de Mediascene</h5>
+
+            <p>
+                <button type="submit" name="modi" class="btnAjouter">Modifier MediaScene</button>
+            </p>
+            <p>
+                <button type="submit" name="supprimer" class="btnsupp">Supprimer</button>
+            </p>
+
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>

@@ -8,6 +8,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class ConteDAO extends GenericDAO<Conte, Integer> implements IConteDAO {
 
@@ -33,5 +35,18 @@ public class ConteDAO extends GenericDAO<Conte, Integer> implements IConteDAO {
         session.getTransaction().commit();
         System.out.println("contedao" + admin.getIdAdmin());
         return admin.getIdAdmin();
+    }
+
+    @Override
+    public List<Conte> ListCnt(int idAdmin) {
+        List<Conte> results = null;
+        try {
+            Session session = sessionFactory.openSession();
+            results = session.createQuery("from Conte c where c.idAdmin = " + idAdmin + " order by idConte DESC ").list();
+            session.close();
+        } catch (Exception ex) {
+            System.err.println("Erreur Dans mediascene dao find all ms by idcnt : \n" + ex.getMessage());
+        }
+        return results;
     }
 }

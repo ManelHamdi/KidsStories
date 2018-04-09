@@ -10,5 +10,7 @@ public interface IMediasceneDAO extends IGenericDAO<Mediascene, Integer> {
 
     Conte ConteMeds(int Idcnt);
 
+    int NumOrd(int idMedsc);
+
     List<Mediascene> ListMs(int idCnt);
 }

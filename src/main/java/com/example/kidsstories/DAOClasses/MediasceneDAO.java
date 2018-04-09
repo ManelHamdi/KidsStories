@@ -45,6 +45,22 @@ public class MediasceneDAO extends GenericDAO<Mediascene, Integer> implements IM
     }
 
     @Override
+    public int NumOrd(int idcnt) {
+        int num = 0;
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Mediascene medsc = (Mediascene) session.createQuery("FROM Mediascene where idConte = " + idcnt + "order by idMediascene desc ").setMaxResults(1).uniqueResult();
+        session.getTransaction().commit();
+        try {
+            num = medsc.getNumOrdre() + 1;
+        } catch (Exception e) {
+            num = 1;
+        }
+        return num;
+
+    }
+
+    @Override
     public List<Mediascene> ListMs(int idCnt) {
         List<Mediascene> results = null;
         try {

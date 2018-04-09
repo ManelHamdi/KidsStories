@@ -36,6 +36,11 @@ public class MediasceneService implements IMediasceneService {
     }
 
     @Override
+    public int NumOrd(int idMedsc) {
+        return imedsdao.NumOrd(idMedsc);
+    }
+
+    @Override
     public List<Mediascene> ListMs(int idCnt) {
         return imedsdao.ListMs(idCnt);
     }
@@ -50,5 +55,20 @@ public class MediasceneService implements IMediasceneService {
             return false;
         }
 
+    }
+
+    @Override
+    public Mediascene findById(int idMs) {
+        return imedsdao.findById(idMs);
+    }
+
+    @Override
+    public Boolean updateMs(Mediascene mediascene) {
+        try {
+            return imedsdao.update(mediascene);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

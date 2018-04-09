@@ -149,7 +149,7 @@ public abstract class GenericDAO<E, PK extends java.io.Serializable> implements 
     }
 
     @SuppressWarnings("unchecked")
-    public E findById(String id) {
+    public E findById(int id) {
         List<E> results = null;
         E result = null;
         try {

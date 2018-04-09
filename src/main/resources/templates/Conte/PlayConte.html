@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<html xmlns:th="https://www.thymeleaf.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="https://www.thymeleaf.org/ ">
+<title>Kids Stories</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="css/stylePlay.css" type="text/css" media="all"/>
+
+
+<head>
+    <form action="/GererConte" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="idAdmin" th:value="${idAdmin}">
+        <input type="hidden" name="idConte" th:value="${idConte}">
+        <button type="submit" name="index" style="width: 20%;border-radius: 5%;background-color: white"><img
+                src="images/logo.png" width="100%"></button>
+        <button type="submit" name="logout" style="width: 5%;border-radius: 20%;background-color: white"><img
+                src="images/logOut.png" width="100%"></button>
+    </form>
+</head>
+<body>
+
+
+<table>
+    <tr>
+        <td width="30%">
+
+            <div class="cardm">
+
+                <form action="/GererConte" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="idConte" th:value="${idConte}">
+                    <input type="hidden" name="idAdmin" th:value="${idAdmin}">
+
+                    <img th:src="@{'data:image/jpg;base64,' +
+    *{T(org.springframework.util.Base64Utils).encodeToString(img)}}" style="width:100%">
+                    <h3 th:text="${titre}">titre de Conte</h3>
+                    <p>
+                        <input class="btnGc" type="submit" name="gererMs" value="Modifier"><br/><br/>
+                    </p>
+
+                </form>
+
+            </div>
+
+
+        </td>
+
+        <td>
+
+
+            <div class="w3-content" style="max-width:800px" th:each="lstMs: ${listMs}">
+
+                <div class="mySlides">
+                    <!-- **************** image *************** -->
+                    <img th:src="@{'data:image/jpg;base64,' +
+            *{T(org.springframework.util.Base64Utils).encodeToString(lstMs.img)}}" style="width:70%">
+                    <!-- ***************** Audio ************** -->
+                    <audio controls style="width: 180px;">
+                        <source th:src="@{'data:audio/mp3;base64,' +
+                *{T(org.springframework.util.Base64Utils).encodeToString(lstMs.audio)}}"
+                                type="audio/mpeg">
+                    </audio>
+                    <!-- **************** Texte *************** -->
+                    <h5 th:text="${lstMs.texte}">texte de Mediascene</h5>
+
+                    <br/>
+                </div>
+            </div>
+
+            <div class="w3-center">
+                <div class="w3-section">
+                    <button class="w3-button w3-light-grey" onclick="plusDivs(-1)">❮ Prev</button>
+                    <button class="w3-button w3-light-grey" onclick="plusDivs(1)">Next ❯</button>
+                </div>
+            </div>
+
+
+        </td>
+    </tr>
+</table>
+
+
+<script>
+    var slideIndex = 1;
+    showDivs(slideIndex);
+
+    function plusDivs(n) {
+        showDivs(slideIndex += n);
+    }
+
+    function currentDiv(n) {
+        showDivs(slideIndex = n);
+    }
+
+    function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("demo");
+        if (n > x.length) {
+            slideIndex = 1
+        }
+        if (n < 1) {
+            slideIndex = x.length
+        }
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" w3-red", "");
+        }
+        x[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " w3-red";
+    }
+</script>
+
+
+</body>
+</html>

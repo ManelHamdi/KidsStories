@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="https://www.thymeleaf.org/ ">
+<html>
+<head>
+    <title>Kids Stories</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style first page.css" type="text/css" media="all"/>
+    <script>
+        function myFunction() {
+            var input, filter, ul, li, a, i;
+            input = document.getElementById("search");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("body");
+            li = ul.getElementsByTagName("div");
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("h3")[0];
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+
+                }
+            }
+        }
+    </script>
+
+    <script>
+        function hiddenShow() {
+            var x = document.getElementById("ch");
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+        }
+    </script>
+
+
+</head>
+<body id="body">
+<form action="/GererConte" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="idAdmin" th:value="${idAdmin}">
+    <input type="hidden" name="idConte" th:value="${idConte}">
+    <button type="submit" name="index" style="width: 20%;border-radius: 5%;background-color: white"><img
+            src="images/logo.png" width="100%"></button>
+    <button type="submit" name="logout" style="width: 5%;border-radius: 20%;background-color: white"><img
+            src="images/logOut.png" width="100%"></button>
+</form>
+<br/>
+<br/>
+
+<p><input class="search" type="text" id="search" onkeyup="myFunction()" placeholder="Search for Titre Conte..."
+          title="Type in a name">
+    <button class="btnCreer" onclick="hiddenShow()">Creer nouvelle Conte</button>
+</p>
+<br/>
+
+
+<!-- ************** creation de conte *************** -->
+
+
+<div class="cardhidden" id="ch">
+    <form action="/CreerConte" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="idAdmin" th:value="${idAdmin}">
+        <input class="text" placeholder="Titre" name="titre" type="text" required="required"><br/><br/>
+        Choisir une image &nbsp
+        <input placeholder="imgCnt" name="imgCnt" type="file" required=""><br/><br/>
+        <h3 th:text="${Erreur}" style="color:red"></h3>
+        <input class="btnV" type="submit" value="Valider">
+        <input class="btnR" type="reset" name="suivant" value="réinitialiser">
+    </form>
+</div>
+<br/><br/>
+
+
+<!-- Liste des contes -->
+
+
+<div class="cardi" th:each="lstCnt: ${ListCnt}">
+
+    <div class="card">
+
+        <form action="/GererConte" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="idConte" th:value="${lstCnt.idConte}">
+            <input type="hidden" name="idAdmin" th:value="${idAdmin}">
+
+            <img th:src="@{'data:image/jpg;base64,' +
+    *{T(org.springframework.util.Base64Utils).encodeToString(lstCnt.imgconte)}}" style="width:100%">
+            <h3 th:text="${lstCnt.titre}">titre de Conte</h3>
+            <p>
+                <button type="submit" name="gererMs" class="btnAjouter">Gerer MediaScene</button>
+            </p>
+            <button type="submit" name="play" class="btnPlay">Play</button>
+            <button type="submit" name="mod" class="btnMod"> Modifier</button>
+            <p>
+                <button type="submit" name="supprimer" class="btnsupp">Supprimer</button>
+            </p>
+
+        </form>
+    </div>
+
+</div>
+
+
+</body>
+</html>

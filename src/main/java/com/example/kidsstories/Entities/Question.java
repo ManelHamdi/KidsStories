@@ -8,7 +8,7 @@ public class Question {
     private String idQuestion;
     private String titre;
     private String réponse;
-    private String image;
+    private byte[] image;
     private int idConte;
     private int idCategories;
     private Conte conteByIdConte;
@@ -45,12 +45,12 @@ public class Question {
     }
 
     @Basic
-    @Column(name = "image", nullable = false, length = 200)
-    public String getImage() {
+    @Column(name = "image", nullable = false)
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 

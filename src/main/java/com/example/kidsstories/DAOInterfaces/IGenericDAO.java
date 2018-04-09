@@ -18,7 +18,7 @@ public interface IGenericDAO<E, PK extends java.io.Serializable> {
 
     List<E> findByCriteria(String propertyName1, Object value1);
 
-    E findById(String id);
+    E findById(int id);
 //	public Object findBy(Class<?> clazz, Serializable id);
 
 

@@ -19,12 +19,43 @@ public class ConteService implements IConteService {
         return iConteDAO.findAll();
     }
 
+    @Override
+    public List<Conte> ListCnt(int idAdmin) {
+        return iConteDAO.ListCnt(idAdmin);
+    }
+
+    @Override
+    public Conte findById(int idCnt) {
+        return iConteDAO.findById(idCnt);
+    }
+
     public Boolean ajouter( /* String titre,imgconte */ Conte conte) {
         return iConteDAO.saveBool(conte);
     }
 
     @Override
-    public int maxIdAdmin(String nom, String pass) {
+    public int findIdAdmin(String nom, String pass) {
         return iConteDAO.maxIdAdmin(nom, pass);
+    }
+
+    @Override
+    public Boolean deleteConte(Conte idConte) {
+        try {
+            iConteDAO.delete(idConte);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public Boolean updateConte(Conte conte) {
+        try {
+            return iConteDAO.update(conte);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

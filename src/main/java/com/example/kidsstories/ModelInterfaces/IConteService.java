@@ -7,7 +7,15 @@ import java.util.List;
 public interface IConteService {
     List<Conte> getListconte();
 
+    List<Conte> ListCnt(int idAdmin);
+
+    Conte findById(int idCnt);
+
     Boolean ajouter(Conte conte);
 
-    int maxIdAdmin(String nom, String pass);
+    int findIdAdmin(String nom, String pass);
+
+    Boolean deleteConte(Conte idConte);
+
+    Boolean updateConte(Conte idConte);
 }
