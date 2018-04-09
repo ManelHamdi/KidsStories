@@ -35,7 +35,7 @@ public class ConteService implements IConteService {
 
     @Override
     public int findIdAdmin(String nom, String pass) {
-        return iConteDAO.maxIdAdmin(nom, pass);
+        return iConteDAO.getIdAdmin(nom, pass);
     }
 
     @Override

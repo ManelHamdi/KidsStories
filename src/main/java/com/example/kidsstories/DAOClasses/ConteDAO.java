@@ -25,7 +25,7 @@ public class ConteDAO extends GenericDAO<Conte, Integer> implements IConteDAO {
     }
 
     @Override
-    public int maxIdAdmin(String nom, String pass) {
+    public int getIdAdmin(String nom, String pass) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         System.out.println("contedao");

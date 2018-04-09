@@ -1,7 +1,6 @@
 package com.example.kidsstories.DAOClasses;
 
 import com.example.kidsstories.DAOInterfaces.IMediasceneDAO;
-import com.example.kidsstories.Entities.Conte;
 import com.example.kidsstories.Entities.Mediascene;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -24,7 +23,7 @@ public class MediasceneDAO extends GenericDAO<Mediascene, Integer> implements IM
         }
     }
 
-    @Override
+   /* @Override
     public int maxIdConte() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -42,7 +41,7 @@ public class MediasceneDAO extends GenericDAO<Mediascene, Integer> implements IM
         session.getTransaction().commit();
         System.out.println("mediascenedao " + conte.getIdConte());
         return conte;
-    }
+    }*/
 
     @Override
     public int NumOrd(int idcnt) {

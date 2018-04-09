@@ -1,19 +1,12 @@
 package com.example.kidsstories.ModelInterfaces;
 
-import com.example.kidsstories.Entities.Conte;
 import com.example.kidsstories.Entities.Mediascene;
 
 import java.util.List;
 
 public interface IMediasceneService {
 
-    List<Mediascene> getListconte();
-
     Boolean ajouter(Mediascene mediascene);
-
-    int maxIdConte();
-
-    Conte getCntMeds(int idCnt);
 
     int NumOrd(int idMedsc);
 

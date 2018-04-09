@@ -5,7 +5,6 @@ import com.example.kidsstories.Entities.Conte;
 import java.util.List;
 
 public interface IConteService {
-    List<Conte> getListconte();
 
     List<Conte> ListCnt(int idAdmin);
 

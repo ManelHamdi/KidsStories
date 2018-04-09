@@ -1,7 +1,6 @@
 package com.example.kidsstories.ModelsClasses;
 
 import com.example.kidsstories.DAOInterfaces.IMediasceneDAO;
-import com.example.kidsstories.Entities.Conte;
 import com.example.kidsstories.Entities.Mediascene;
 import com.example.kidsstories.ModelInterfaces.IMediasceneService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,23 +15,8 @@ public class MediasceneService implements IMediasceneService {
     private IMediasceneDAO imedsdao;
 
     @Override
-    public List<Mediascene> getListconte() {
-        return imedsdao.findAll();
-    }
-
-    @Override
     public Boolean ajouter(Mediascene mediascene) {
         return imedsdao.saveBool(mediascene);
-    }
-
-    @Override
-    public int maxIdConte() {
-        return imedsdao.maxIdConte();
-    }
-
-    @Override
-    public Conte getCntMeds(int idCnt) {
-        return imedsdao.ConteMeds(idCnt);
     }
 
     @Override
