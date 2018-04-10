@@ -1,5 +1,7 @@
 package com.example.kidsstories.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
@@ -45,6 +47,7 @@ public class Categories {
         return Objects.hash(idCategories, typeCategories);
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "categoriesByIdCategories")
     public Collection<Question> getQuestionsByIdCategories() {
         return questionsByIdCategories;

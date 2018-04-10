@@ -17,4 +17,6 @@ public interface IConteService {
     Boolean deleteConte(Conte idConte);
 
     Boolean updateConte(Conte idConte);
+
+    List<Conte> listAllConte();
 }

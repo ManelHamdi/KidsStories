@@ -1,5 +1,7 @@
 package com.example.kidsstories.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Collection;
@@ -84,6 +86,7 @@ public class Conte {
         this.administrateurByIdAdmin = administrateurByIdAdmin;
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "conteByIdConte")
     public Collection<Mediascene> getMediascenesByIdConte() {
         return mediascenesByIdConte;
@@ -93,6 +96,7 @@ public class Conte {
         this.mediascenesByIdConte = mediascenesByIdConte;
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "conteByIdConte")
     public Collection<Question> getQuestionsByIdConte() {
         return questionsByIdConte;

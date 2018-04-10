@@ -1,5 +1,7 @@
 package com.example.kidsstories.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
@@ -81,6 +83,7 @@ public class Administrateur {
         return Objects.hash(idAdmin, nom, prenom, password, email);
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "administrateurByIdAdmin")
     public Collection<Conte> getContesByIdAdmin() {
         return contesByIdAdmin;

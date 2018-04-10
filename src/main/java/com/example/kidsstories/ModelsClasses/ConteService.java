@@ -58,4 +58,9 @@ public class ConteService implements IConteService {
             return false;
         }
     }
+
+    @Override
+    public List<Conte> listAllConte() {
+        return iConteDAO.findAll();
+    }
 }
