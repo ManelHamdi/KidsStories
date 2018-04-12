@@ -81,7 +81,7 @@ public class ControllerGererConte {
             InputStream inn = new ByteArrayInputStream(imgCnt.getBytes());
             BufferedImage bbbImage = new BufferedImage(
                     newImage.getWidth(null), newImage.getHeight(null),
-                    BufferedImage.TYPE_INT_ARGB);
+                    BufferedImage.TYPE_INT_RGB);
             Graphics2D g = bbbImage.createGraphics();
             g.drawImage(newImage, 0, 0, null);
             g.dispose();
@@ -169,7 +169,7 @@ public class ControllerGererConte {
             //***************convert to bytes***********
             BufferedImage bufferedImage = new BufferedImage(
                     newImage.getWidth(null), newImage.getHeight(null),
-                    BufferedImage.TYPE_INT_ARGB);
+                    BufferedImage.TYPE_INT_RGB);
             Graphics2D g = bufferedImage.createGraphics();
             g.drawImage(newImage, 0, 0, null);
             g.dispose();
