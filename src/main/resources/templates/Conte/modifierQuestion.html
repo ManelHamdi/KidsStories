@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="https://www.thymeleaf.org/ ">
+<html>
+<head>
+    <title>Kids Stories</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style first page.css" type="text/css" media="all"/>
+    <script>
+        function myFunction() {
+            var input, filter, ul, li, a, i, b;
+            input = document.getElementById("search2");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("body");
+            li = ul.getElementsByTagName("div");
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("h5")[0];
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+
+                }
+            }
+        }
+    </script>
+
+    <script>
+        function hiddenShow() {
+            var x = document.getElementById("ch");
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+        }
+    </script>
+
+</head>
+<body class="body2" id="body">
+
+<table width="100%">
+    <tr>
+        <td>
+            <form action="/GererConte" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="idAdmin" th:value="${idAdmin}">
+                <input type="hidden" name="idConte" th:value="${idConte}">
+                <button type="submit" name="index" style="width: 60%;border-radius: 5%;background-color: white"><img
+                        src="images/logo.png" width="100%"></button>
+                <button type="submit" name="logout" style="width: 15%;border-radius: 20%;background-color: white"><img
+                        src="images/logOut.png" width="100%"></button>
+            </form>
+
+        </td>
+        <td rowspan="2" width="70%">
+            <input class="search2" type="text" id="search2" onkeyup="myFunction()"
+                   placeholder="Rechercher Titre Conte..." title="Type in a name"><br/>
+            <table class="tt">
+                <tr>
+                    <td>
+                        <!-- ************************ Liste Conte ******************** -->
+                        <div class="cardm" th:each="lstCnt: ${ListCnt}">
+                            <form action="/GererConte" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="idAdmin" th:value="${idAdmin}">
+                                <input type="hidden" name="idConte" th:value="${lstCnt.idConte}">
+
+                                <img th:src="@{'data:image/jpg;base64,' +
+            *{T(org.springframework.util.Base64Utils).encodeToString(lstCnt.imgconte)}}" style="width:100%">
+                                <h5 th:text="${lstCnt.titre}">titre de conte</h5>
+
+                                <button type="submit" name="gererQuestion" class="btnAjouterm">Gerer Question</button>
+                                <br/><br/>
+
+                            </form>
+
+                        </div>
+
+
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <!-- ************************ Conte ******************** -->
+            <div class="cardt">
+
+                <img th:src="@{'data:image/jpg;base64,' +
+            *{T(org.springframework.util.Base64Utils).encodeToString(img)}}" style="width:100%">
+
+                <h5 th:text="${titre}">titre de Conte</h5>
+
+                <button type="submit" name="ajouMs" class="btnAjoutermt" onclick="hiddenShow()">Nouvelle Question
+                </button>
+                <br/><br/>
+                <form action="/GererConte" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="idConte" th:value="${idConte}">
+                    <input type="hidden" name="idAdmin" th:value="${idAdmin}">
+                    <button type="submit" name="play" class="btnAjoutermt">Play</button>
+                    <br/><br/>
+                </form>
+            </div>
+        </td>
+    </tr>
+</table>
+
+
+<!-- ************** creation de Question *************** -->
+
+
+<div class="cardhidden2" id="ch">
+    <form action="/GererQuestion" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="idAdmin" th:value="${idAdmin}">
+        <input type="hidden" name="idConte" th:value="${idConte}">
+
+        <input class="text" placeholder="Question" name="titreQs" type="text" required="">
+        <br/><br/>
+
+        Choisir un image
+        <input placeholder="Image" name="imgPage" type="file">
+        <br/><br/>
+
+        Choisir un Categories
+        <select name="categorie">
+            <option th:each="lstcat : ${LstCat}"
+                    th:value="${lstcat.idCategories}"
+                    th:text="${lstcat.typeCategories}"></option>
+        </select>
+        <br/><br/>
+
+        Choisir Mediascene
+        <select name="meds">
+            <option th:each="lstmsi : ${listMs}"
+                    th:value="${lstmsi.idMediascene}"
+                    th:text="'Page N° '+${lstmsi.numOrdre}"></option>
+        </select>
+        <br/><br/>
+
+        <input class="text" placeholder="Reponse Question" name="reponseQs" type="text" required="">
+        <br/>
+        <h3 th:text="${Erreur}" style="color:red"></h3>
+
+        <input class="btnV" type="submit" name="ajouterQs" value="Valider">
+        <input class="btnR" type="reset" name="reset" value="réinitialiser">
+    </form>
+</div>
+<br/><br/>
+
+<!-- ************** Modification de conte *************** -->
+
+
+<div class="cardhiddenMod" id="chm">
+    <form action="/GererQuestion" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="idAdmin" th:value="${idAdmin}">
+        <input type="hidden" name="idConte" th:value="${idConte}">
+
+        <img th:src="@{'data:image/jpg;base64,' +
+    *{T(org.springframework.util.Base64Utils).encodeToString(imgQs)}}" style="width:100%">
+        Choisir une image &nbsp
+        <input placeholder="img" name="newimg" type="file"><br/><br/>
+        <input class="text" placeholder="Titre" name="titre" type="text" required="required" th:value="${titreQs}">
+        Choisir un Categories
+        <select name="categorie">
+            <option th:value="${idCat}"
+                    th:text="${typeCat}"></option>
+            <option th:each="lstcat : ${LstCat}"
+                    th:value="${lstcat.idCategories}"
+                    th:text="${lstcat.typeCategories}"></option>
+        </select>
+        <br/><br/>
+
+        Choisir Mediascene
+        <select name="meds">
+            <option th:value="${idMs}"
+                    th:text="'Page N° '+${numP}"></option>
+            <option th:each="lstmsi : ${listMs}"
+                    th:value="${lstmsi.idMediascene}"
+                    th:text="'Page N° '+${lstmsi.numOrdre}"></option>
+        </select>
+        <br/><br/>
+        <input class="text" placeholder="Reponse" name="reponse" type="text" required="required" th:value="${reponse}">
+        <h3 th:text="${Erreur}" style="color:red"></h3>
+        <button type="submit" name="modifier" class="btnV">Modifier</button>
+        <button type="submit" name="anuulerModif" class="btnV">Annuler</button>
+        <br/><br/>
+    </form>
+</div>
+<br/><br/>
+
+
+<!-- ************************ Liste Question ******************** -->
+
+
+<div class="cardi2" th:each="lstQs: ${lstQs}">
+
+    <div class="card">
+
+        <form action="/GererQuestion" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="idQs" th:value="${lstQs.idQuestion}">
+            <input type="hidden" name="idAdmin" th:value="${idAdmin}">
+            <input type="hidden" name="idConte" th:value="${lstQs.idConte}">
+            <!-- **************** Titre Question ************ -->
+            <h7 th:text="'Question : ' + ${lstQs.titre}">Titre de question</h7>
+            <!-- **************** Categories et idMediascene *************** -->
+            <h5 th:text="${lstQs.getCategoriesByIdCategories().getTypeCategories()}+ ' apres page N° ' + ${lstQs.getMediasceneByIdMediascene().getNumOrdre()}">
+                Categories apres page n..</h5>
+            <!-- **************** image *************** -->
+            <img th:src="@{'data:image/jpg;base64,' +
+            *{T(org.springframework.util.Base64Utils).encodeToString(lstQs.image)}}" style="width:100%">
+            <!-- **************** Reponse *************** -->
+            <h5 th:text="${lstQs.reponse}">Reponse au question</h5>
+
+            <p>
+                <button type="submit" name="modi" class="btnAjouter">Modifier Question</button>
+            </p>
+            <p>
+                <button type="submit" name="supprimer" class="btnsupp">Supprimer</button>
+            </p>
+
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>

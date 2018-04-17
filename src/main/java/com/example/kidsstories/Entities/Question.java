@@ -1,26 +1,29 @@
 package com.example.kidsstories.Entities;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Objects;
 
 @Entity
 public class Question {
-    private String idQuestion;
+    private int idQuestion;
     private String titre;
-    private String réponse;
+    private String reponse;
     private byte[] image;
     private int idConte;
     private int idCategories;
+    private int idMediascene;
     private Conte conteByIdConte;
     private Categories categoriesByIdCategories;
+    private Mediascene mediasceneByIdMediascene;
 
     @Id
-    @Column(name = "id_question", nullable = false, length = 50)
-    public String getIdQuestion() {
+    @Column(name = "id_question", nullable = false)
+    public int getIdQuestion() {
         return idQuestion;
     }
 
-    public void setIdQuestion(String idQuestion) {
+    public void setIdQuestion(int idQuestion) {
         this.idQuestion = idQuestion;
     }
 
@@ -35,13 +38,13 @@ public class Question {
     }
 
     @Basic
-    @Column(name = "réponse", nullable = false, length = 50)
-    public String getRéponse() {
-        return réponse;
+    @Column(name = "reponse", nullable = false, length = 50)
+    public String getReponse() {
+        return reponse;
     }
 
-    public void setRéponse(String réponse) {
-        this.réponse = réponse;
+    public void setReponse(String reponse) {
+        this.reponse = reponse;
     }
 
     @Basic
@@ -74,23 +77,36 @@ public class Question {
         this.idCategories = idCategories;
     }
 
+    @Basic
+    @Column(name = "id_mediascene", nullable = false)
+    public int getIdMediascene() {
+        return idMediascene;
+    }
+
+    public void setIdMediascene(int idMediascene) {
+        this.idMediascene = idMediascene;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Question question = (Question) o;
-        return idConte == question.idConte &&
+        return idQuestion == question.idQuestion &&
+                idConte == question.idConte &&
                 idCategories == question.idCategories &&
-                Objects.equals(idQuestion, question.idQuestion) &&
+                idMediascene == question.idMediascene &&
                 Objects.equals(titre, question.titre) &&
-                Objects.equals(réponse, question.réponse) &&
-                Objects.equals(image, question.image);
+                Objects.equals(reponse, question.reponse) &&
+                Arrays.equals(image, question.image);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(idQuestion, titre, réponse, image, idConte, idCategories);
+        int result = Objects.hash(idQuestion, titre, reponse, idConte, idCategories, idMediascene);
+        result = 31 * result + Arrays.hashCode(image);
+        return result;
     }
 
     @ManyToOne
@@ -111,5 +127,15 @@ public class Question {
 
     public void setCategoriesByIdCategories(Categories categoriesByIdCategories) {
         this.categoriesByIdCategories = categoriesByIdCategories;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "id_mediascene", referencedColumnName = "id_mediascene", nullable = false, insertable = false, updatable = false)
+    public Mediascene getMediasceneByIdMediascene() {
+        return mediasceneByIdMediascene;
+    }
+
+    public void setMediasceneByIdMediascene(Mediascene mediasceneByIdMediascene) {
+        this.mediasceneByIdMediascene = mediasceneByIdMediascene;
     }
 }

@@ -27,7 +27,7 @@ body {
 
 .cardi {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 20%;
+    max-width: 22%;
     text-align: center;
     font-family: arial;
     display: inline-block;
@@ -115,7 +115,7 @@ div {
     background-color: #ff8000;
     text-align: center;
     cursor: pointer;
-    width: 40%;
+    width: 50%;
     font-size: 15px;
 }
 
@@ -128,7 +128,7 @@ div {
     background-color: #ff8000;
     text-align: center;
     cursor: pointer;
-    width: 40%;
+    width: 45%;
     font-size: 15px;
 }
 
@@ -143,6 +143,32 @@ div {
     cursor: pointer;
     width: 100%;
     font-size: 15px;
+}
+
+.btnGm {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #00b33c;
+    text-align: center;
+    cursor: pointer;
+    width: 50%;
+    font-size: 13px;
+}
+
+.btnGp {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #00b33c;
+    text-align: center;
+    cursor: pointer;
+    width: 45%;
+    font-size: 13px;
 }
 
 .btnCreer {

@@ -29,7 +29,7 @@ public class ConteService implements IConteService {
         return iConteDAO.findById(idCnt);
     }
 
-    public Boolean ajouter( /* String titre,imgconte */ Conte conte) {
+    public Boolean ajouter(Conte conte) {
         return iConteDAO.saveBool(conte);
     }
 

@@ -1,9 +1,13 @@
 package com.example.kidsstories.Controlleurs;
 
+import com.example.kidsstories.Entities.Categories;
 import com.example.kidsstories.Entities.Conte;
 import com.example.kidsstories.Entities.Mediascene;
+import com.example.kidsstories.Entities.Question;
+import com.example.kidsstories.ModelInterfaces.ICategorieService;
 import com.example.kidsstories.ModelInterfaces.IConteService;
 import com.example.kidsstories.ModelInterfaces.IMediasceneService;
+import com.example.kidsstories.ModelInterfaces.IQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -31,6 +35,11 @@ public class ControllerGererConte {
     @Autowired
     private IMediasceneService iMediasceneService;
 
+    @Autowired
+    private IQuestionService iQuestionService;
+
+    @Autowired
+    private ICategorieService iCategorieService;
 
     @RequestMapping(value = "/GererConte", params = "index", method = RequestMethod.POST)
     public String GererCnt(@RequestParam int idAdmin,
@@ -154,7 +163,6 @@ public class ControllerGererConte {
     public String ModifierCnt(@RequestParam int idConte,
                               @RequestParam int idAdmin,
                               @RequestParam String titre,
-                              @RequestParam byte[] oldimg,
                               @RequestParam MultipartFile newimg,
                               ModelMap modelMap) throws IOException {
         Conte cnt = iConteService.findById(idConte);
@@ -219,5 +227,25 @@ public class ControllerGererConte {
         modelMap.put("titre", cnt.getTitre());
         modelMap.put("img", cnt.getImgconte());
         return "Conte/PlayConte";
+    }
+
+    @RequestMapping(value = "/GererConte", params = "gererQuestion", method = RequestMethod.POST)
+    public String QuestionCnt(@RequestParam int idConte,
+                              @RequestParam int idAdmin,
+                              ModelMap modelMap) {
+        Conte cnt = iConteService.findById(idConte);
+        List<Conte> lstcnt = iConteService.ListCnt(idAdmin);
+        List<Question> lstQs = iQuestionService.ListQs(idConte);
+        List<Mediascene> lstMs = iMediasceneService.ListMs(idConte);
+        List<Categories> lstCat = iCategorieService.listCat();
+        modelMap.put("idConte", idConte);
+        modelMap.put("idAdmin", idAdmin);
+        modelMap.put("titre", cnt.getTitre());
+        modelMap.put("img", cnt.getImgconte());
+        modelMap.put("lstQs", lstQs);
+        modelMap.put("listMs", lstMs);
+        modelMap.put("ListCnt", lstcnt);
+        modelMap.put("LstCat", lstCat);
+        return "Conte/GererQuestion";
     }
 }
