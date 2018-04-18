@@ -12,4 +12,6 @@ public interface IQuestionService {
     Question findQbyId(int idQs);
 
     Boolean deleteQs(Question idQs);
+
+    Boolean updateQs(Question idQs);
 }

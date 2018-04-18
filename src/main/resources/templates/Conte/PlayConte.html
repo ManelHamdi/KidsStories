@@ -26,7 +26,7 @@
         <td width="30%">
 
             <div class="cardm">
-
+                <!-- **************** Conte ************************** -->
                 <form action="/GererConte" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="idConte" th:value="${idConte}">
                     <input type="hidden" name="idAdmin" th:value="${idAdmin}">
@@ -35,7 +35,8 @@
     *{T(org.springframework.util.Base64Utils).encodeToString(img)}}" style="width:100%">
                     <h3 th:text="${titre}">titre de Conte</h3>
                     <p>
-                        <input class="btnGc" type="submit" name="gererMs" value="Modifier"><br/><br/>
+                        <input class="btnGc" type="submit" name="gererMs" value="Mediascene"><br/><br/>
+                        <input class="btnGc" type="submit" name="gererQuestion" value="Question"><br/><br/>
                     </p>
 
                 </form>
@@ -47,10 +48,12 @@
 
         <td>
 
-
+            <!-- **************** Liste Mediascene ************************** -->
             <div class="w3-content" style="max-width:800px" th:each="lstMs: ${listMs}">
 
                 <div class="mySlides">
+                    <!-- **************** N° page ************* -->
+                    <h5 th:text="' Page N° ' + ${lstMs.numOrdre}">texte de Mediascene</h5>
                     <!-- **************** image *************** -->
                     <img th:src="@{'data:image/jpg;base64,' +
             *{T(org.springframework.util.Base64Utils).encodeToString(lstMs.img)}}" style="width:70%">
@@ -65,7 +68,33 @@
 
                     <br/>
                 </div>
+
+
+                <div th:each="lstQs: ${lstQs}">
+                    <div class="w3-content"
+                         th:if="${lstQs.getMediasceneByIdMediascene().getIdMediascene()==lstMs.idMediascene}">
+
+                        <div class="mySlides">
+                            <!-- **************** titre ************* -->
+                            <h5 th:text="' Question: ' + ${lstQs.titre}">question</h5>
+                            <!-- **************** image *************** -->
+                            <img th:src="@{'data:image/jpg;base64,' +
+            *{T(org.springframework.util.Base64Utils).encodeToString(lstQs.image)}}" style="width:70%">
+                            <!-- ***************** Audio ************** -->
+                            <h5 th:text="'Categories ' + ${lstQs.getCategoriesByIdCategories().getTypeCategories()}">
+                                Categories</h5>
+                            <!-- **************** Texte *************** -->
+                            <h5 th:text="'Reponse: ' + ${lstQs.reponse}">reponse</h5>
+
+                            <br/>
+                        </div>
+                    </div>
+
+                </div>
+
+
             </div>
+
 
             <div class="w3-center">
                 <div class="w3-section">
@@ -73,7 +102,6 @@
                     <button class="w3-button w3-light-grey" onclick="plusDivs(1)">Next ❯</button>
                 </div>
             </div>
-
 
         </td>
     </tr>

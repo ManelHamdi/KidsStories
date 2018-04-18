@@ -244,27 +244,4 @@ public class ControllerGererMediascene {
 
 
     }
-
-
-
-
-   /* @GetMapping
-    public String GererMediascene(ModelMap modelMap,
-                                  @RequestParam int idConte,
-                                  @RequestParam int idAdmin){
-        //************************ general return ***********************
-        Conte cnt = iConteService.findById(idConte);
-        List<Conte> lstCnt = iConteService.ListCnt(idAdmin);
-        List<Mediascene> lstMs = iMediasceneService.ListMs(idConte);
-        //************************  ***********************
-        modelMap.put("ListCnt", lstCnt);
-        modelMap.put("idConte", idConte);
-        modelMap.put("listMs", lstMs);
-        modelMap.put("idAdmin", idAdmin);
-        modelMap.put("titre", cnt.getTitre());
-        modelMap.put("img", cnt.getImgconte());
-        return "Conte/GererMediascene";
-    }*/
-
-
 }

@@ -2,6 +2,7 @@ package com.example.kidsstories.DAOClasses;
 
 import com.example.kidsstories.DAOInterfaces.IMediasceneDAO;
 import com.example.kidsstories.Entities.Mediascene;
+import com.example.kidsstories.Entities.MediasceneQuestion;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -22,26 +23,6 @@ public class MediasceneDAO extends GenericDAO<Mediascene, Integer> implements IM
             ex.printStackTrace();
         }
     }
-
-   /* @Override
-    public int maxIdConte() {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        Conte conte = (Conte) session.createQuery("FROM Conte order by idConte desc ").setMaxResults(1).uniqueResult();
-        session.getTransaction().commit();
-        System.out.println("mediascenedao " + conte.getIdConte());
-        return conte.getIdConte();
-    }
-
-    @Override
-    public Conte ConteMeds(int Idcnt) {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        Conte conte = (Conte) session.createQuery("FROM Conte order by idConte desc ").setMaxResults(1).uniqueResult();
-        session.getTransaction().commit();
-        System.out.println("mediascenedao " + conte.getIdConte());
-        return conte;
-    }*/
 
     @Override
     public int NumOrd(int idcnt) {
@@ -65,6 +46,19 @@ public class MediasceneDAO extends GenericDAO<Mediascene, Integer> implements IM
         try {
             Session session = sessionFactory.openSession();
             results = session.createQuery("from Mediascene m where m.idConte = " + idCnt).list();
+            session.close();
+        } catch (Exception ex) {
+            System.err.println("Erreur Dans mediascene dao find all ms by idcnt : \n" + ex.getMessage());
+        }
+        return results;
+    }
+
+    @Override
+    public List<MediasceneQuestion> ListMsQs(int idCnt) {
+        List<MediasceneQuestion> results = null;
+        try {
+            Session session = sessionFactory.openSession();
+            results = session.createQuery("from Mediascene m, Question q where m.idMediascene = q.idMediascene and m.idConte = " + idCnt).list();
             session.close();
         } catch (Exception ex) {
             System.err.println("Erreur Dans mediascene dao find all ms by idcnt : \n" + ex.getMessage());

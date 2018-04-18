@@ -21,6 +21,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
@@ -60,8 +61,21 @@ public class ControllerGererQuestion {
             if (type.equals("image")) {
                 System.out.println("It's an image");
             } else {
-                modelMap.put("Erreur", "it's not an image");
-                return "Conte/GererConte";
+                modelMap.put("Erreur", "it's not an image try again");
+                Conte cnt = iConteService.findById(idConte);
+                List<Conte> lstcnt = iConteService.ListCnt(idAdmin);
+                List<Question> lstQs = iQuestionService.ListQs(idConte);
+                List<Mediascene> lstMs = iMediasceneService.ListMs(idConte);
+                List<Categories> lstCat = iCategorieService.listCat();
+                modelMap.put("idConte", idConte);
+                modelMap.put("idAdmin", idAdmin);
+                modelMap.put("titre", cnt.getTitre());
+                modelMap.put("img", cnt.getImgconte());
+                modelMap.put("lstQs", lstQs);
+                modelMap.put("listMs", lstMs);
+                modelMap.put("ListCnt", lstcnt);
+                modelMap.put("LstCat", lstCat);
+                return "Conte/GererQuestion";
             }
 
 
@@ -141,10 +155,10 @@ public class ControllerGererQuestion {
     }
 
     @RequestMapping(value = "/GererQuestion", params = "modi", method = RequestMethod.POST)
-    public String modQs(@RequestParam int idConte,
-                        @RequestParam int idAdmin,
-                        @RequestParam int idQs,
-                        ModelMap modelMap) {
+    public String redModQs(@RequestParam int idConte,
+                           @RequestParam int idAdmin,
+                           @RequestParam int idQs,
+                           ModelMap modelMap) {
         Question question = iQuestionService.findQbyId(idQs);
         Categories categories = iCategorieService.findCbyId(question.getIdCategories());
         Mediascene mediascene = iMediasceneService.findById(question.getIdMediascene());
@@ -169,6 +183,7 @@ public class ControllerGererQuestion {
         modelMap.put("listMs", lstMs);
         modelMap.put("ListCnt", lstcnt);
         modelMap.put("LstCat", lstCat);
+        modelMap.put("idQs", idQs);
         return "Conte/modifierQuestion";
     }
 
@@ -191,4 +206,74 @@ public class ControllerGererQuestion {
         modelMap.put("LstCat", lstCat);
         return "Conte/GererQuestion";
     }
+
+    @RequestMapping(value = "/GererQuestion", params = "modifier", method = RequestMethod.POST)
+    public String modQs(@RequestParam int idAdmin,
+                        @RequestParam int idConte,
+                        @RequestParam int idQs,
+                        @RequestParam String titre,
+                        @RequestParam int categorie,
+                        @RequestParam String reponse,
+                        @RequestParam int meds,
+                        @RequestParam MultipartFile newimg,
+                        ModelMap modelMap) throws IOException {
+
+        Question question = iQuestionService.findQbyId(idQs);
+        question.setTitre(titre);
+        question.setIdConte(idConte);
+        question.setIdCategories(categorie);
+        question.setReponse(reponse);
+        question.setIdMediascene(meds);
+        String type = newimg.getContentType().split("/")[0];
+        if (type.equals("image")) {
+            //****************** transform image *********
+            InputStream in = new ByteArrayInputStream(newimg.getBytes());
+            BufferedImage bimg = ImageIO.read(in);
+            Image newImage = bimg.getScaledInstance(200, 200, Image.SCALE_DEFAULT);
+            //***************convert to bytes***********
+            BufferedImage bufferedImage = new BufferedImage(
+                    newImage.getWidth(null), newImage.getHeight(null),
+                    BufferedImage.TYPE_INT_RGB);
+            Graphics2D g = bufferedImage.createGraphics();
+            g.drawImage(newImage, 0, 0, null);
+            g.dispose();
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(bufferedImage, "jpg", baos);
+            byte[] imageInByte = baos.toByteArray();
+            //*************** set image *************
+            question.setImage(imageInByte);
+        }
+        /*
+        //******************** update ************************
+        if (iConteService.updateConte(cnt)) {
+            List<Conte> lstCnt = iConteService.ListCnt(idAdmin);
+            modelMap.put("ListCnt", lstCnt);
+            modelMap.put("idAdmin", idAdmin);
+            return "Conte/GererConte";
+        } else {
+            return "Erreur";
+        }
+         */
+        if (iQuestionService.updateQs(question)) {
+            //general return
+            List<Conte> lstcnt = iConteService.ListCnt(idAdmin);
+            modelMap.put("ListCnt", lstcnt);
+            Conte cnt = iConteService.findById(idConte);
+            modelMap.put("idConte", idConte);
+            List<Question> lstQs = iQuestionService.ListQs(idConte);
+            List<Mediascene> lstMs = iMediasceneService.ListMs(idConte);
+            List<Categories> lstCat = iCategorieService.listCat();
+            modelMap.put("idAdmin", idAdmin);
+            modelMap.put("titre", cnt.getTitre());
+            modelMap.put("img", cnt.getImgconte());
+            modelMap.put("lstQs", lstQs);
+            modelMap.put("listMs", lstMs);
+            modelMap.put("LstCat", lstCat);
+            return "Conte/GererQuestion";
+        } else {
+            return "Erreur";
+        }
+
+    }
+
 }

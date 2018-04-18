@@ -74,7 +74,10 @@ public class ControllerGererConte {
                 /* if(type.equals("audio")){*/
                 System.out.println("It's an image");
             } else {
-                modelMap.put("Erreur", "it's not an image");
+                modelMap.put("Erreur", "it's not an image try again");
+                List<Conte> lstCnt = iConteService.ListCnt(idAdmin);
+                modelMap.put("ListCnt", lstCnt);
+                modelMap.put("idAdmin", idAdmin);
                 return "Conte/GererConte";
             }
             System.out.println("get request method " + imgCnt.getContentType());
@@ -108,6 +111,9 @@ public class ControllerGererConte {
                 return "Conte/GererConte";
             }
             modelMap.put("Erreur", "Verifier Tout les champs il ya un erreur");
+            List<Conte> lstCnt = iConteService.ListCnt(idAdmin);
+            modelMap.put("ListCnt", lstCnt);
+            modelMap.put("idAdmin", idAdmin);
             return "Conte/GererConte";
         } catch (Exception e) {
             System.out.println("il ya un erreur contelayoute:" + e);
@@ -220,12 +226,17 @@ public class ControllerGererConte {
                           @RequestParam int idConte,
                           @RequestParam int idAdmin) {
         Conte cnt = iConteService.findById(idConte);
+        List<Question> lstQs = iQuestionService.ListQs(idConte);
         List<Mediascene> lstMs = iMediasceneService.ListMs(idConte);
+        Mediascene m = new Mediascene();
+        Question q = new Question();
+        //if ((q.getMediasceneByIdMediascene().getIdMediascene()+1)==m.getIdMediascene()){}
         modelMap.put("idConte", idConte);
         modelMap.put("idAdmin", idAdmin);
         modelMap.put("listMs", lstMs);
         modelMap.put("titre", cnt.getTitre());
         modelMap.put("img", cnt.getImgconte());
+        modelMap.put("lstQs", lstQs);
         return "Conte/PlayConte";
     }
 

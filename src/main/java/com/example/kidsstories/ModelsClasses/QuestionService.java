@@ -39,4 +39,14 @@ public class QuestionService implements IQuestionService {
             return false;
         }
     }
+
+    @Override
+    public Boolean updateQs(Question idQs) {
+        try {
+            return iQuestionDAO.update(idQs);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

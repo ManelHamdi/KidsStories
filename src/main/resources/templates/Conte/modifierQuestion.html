@@ -107,6 +107,7 @@
 </table>
 
 
+<h3 th:text="${Erreur}" style="color:red"></h3>
 <!-- ************** creation de Question *************** -->
 
 
@@ -148,11 +149,12 @@
 </div>
 <br/><br/>
 
-<!-- ************** Modification de conte *************** -->
+<!-- ************** Modification de Question *************** -->
 
 
 <div class="cardhiddenMod" id="chm">
     <form action="/GererQuestion" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="idQs" th:value="${idQs}">
         <input type="hidden" name="idAdmin" th:value="${idAdmin}">
         <input type="hidden" name="idConte" th:value="${idConte}">
 

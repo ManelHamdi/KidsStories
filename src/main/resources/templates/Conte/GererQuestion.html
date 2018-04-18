@@ -106,7 +106,7 @@
     </tr>
 </table>
 
-
+<h3 th:text="${Erreur}" style="color:red"></h3>
 <!-- ************** creation de Question *************** -->
 
 
@@ -163,7 +163,8 @@
             <!-- **************** Titre Question ************ -->
             <h7 th:text="'Question : ' + ${lstQs.titre}">Titre de question</h7>
             <!-- **************** Categories et idMediascene *************** -->
-            <h5 th:text="${lstQs.getCategoriesByIdCategories().getTypeCategories()}+ ' apres page N° ' + ${lstQs.getMediasceneByIdMediascene().getNumOrdre()}">
+            <h5 th:text="${lstQs.getCategoriesByIdCategories().getTypeCategories()}+
+             ' apres page N° ' + ${lstQs.getMediasceneByIdMediascene().getNumOrdre()}">
                 Categories apres page n..</h5>
             <!-- **************** image *************** -->
             <img th:src="@{'data:image/jpg;base64,' +
