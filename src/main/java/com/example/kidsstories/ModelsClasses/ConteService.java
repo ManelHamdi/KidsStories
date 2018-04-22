@@ -93,4 +93,31 @@ public class ConteService implements IConteService {
     public List<Conte> listAllConte() {
         return iConteDAO.findAll();
     }
+
+    @Override
+    public List<Conte> listConteExceptLast(int idAdmin) {
+        List<Conte> results = null;
+        try {
+            Session session = sessionFactory.openSession();
+            results = session.createQuery("from Conte where idAdmin = :i and idConte != (select (max(idConte)) from Conte )")
+                    .setParameter("i", idAdmin).list();
+            session.close();
+        } catch (Exception ex) {
+            System.err.println("Erreur Dans mediascene dao find all ms by idcnt : \n" + ex.getMessage());
+        }
+        return results;
+    }
+
+    @Override
+    public int lastConte(int idAdmin) {
+        int results = 0;
+        try {
+            Session session = sessionFactory.openSession();
+            results = (int) session.createQuery("select (max(c.idConte)) from Conte c where c.idAdmin = " + idAdmin).uniqueResult();
+            session.close();
+        } catch (Exception ex) {
+            System.err.println("Erreur Dans mediascene dao find all ms by idcnt : \n" + ex.getMessage());
+        }
+        return results;
+    }
 }

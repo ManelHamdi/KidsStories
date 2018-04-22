@@ -75,8 +75,53 @@
 
 <!-- Liste des contes -->
 
+<div style="margin-left: 40%" class="cardi">
 
-<div class="cardi" th:each="lstCnt: ${ListCnt}">
+    <div class="card">
+
+        <form action="/GererConte" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="idConte" th:value="${LastCnt.idConte}">
+            <input type="hidden" name="idAdmin" th:value="${idAdmin}">
+
+            <img th:src="@{'data:image/jpg;base64,' +
+    *{T(org.springframework.util.Base64Utils).encodeToString(LastCnt.imgconte)}}" style="width:100%"/>
+            <h3 th:text="${LastCnt.titre}" style="margin: 0px; font-size: 12px">titre de Conte</h3>
+
+            <!-- **************** teste if empty not Question ************* -->
+
+            <p th:if="${LastCnt.getMediascenesByIdConte().isEmpty()}">
+                <button type="submit" name="gererMs" class="btnGm">MediaScene</button>
+            </p>
+
+            <!-- **************** teste if not empty Question ************* -->
+
+            <p th:if="${!LastCnt.getMediascenesByIdConte().isEmpty()}">
+                <button type="submit" name="gererMs" class="btnGm">MediaScene</button>
+                <button type="submit" name="gererQuestion" class="btnGp">Question</button>
+            </p>
+
+            <!-- **************** teste if empty not play ************* -->
+
+            <p th:if="${LastCnt.getMediascenesByIdConte().isEmpty()}">
+                <button type="submit" name="mod" class="btnMod"> Modifier</button>
+            </p>
+
+            <!-- **************** teste if not empty play ************* -->
+
+            <p th:if="${!LastCnt.getMediascenesByIdConte().isEmpty()}">
+                <button type="submit" name="mod" class="btnMod"> Modifier</button>
+                <button type="submit" name="play" class="btnPlay">Play</button>
+            </p>
+            <button type="submit" name="supprimer" class="btnsupp">Supprimer</button>
+            </p>
+
+        </form>
+    </div>
+
+</div>
+<br/>
+
+<div class="cardi" th:each="lstCnt: ${ListCntEx}">
 
     <div class="card">
 

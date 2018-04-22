@@ -45,6 +45,10 @@ public class ControllerGererConte {
     public String GererCnt(@RequestParam int idAdmin,
                            ModelMap modelMap) {
         List<Conte> lstCnt = iConteService.ListCnt(idAdmin);
+        List<Conte> lstCntEx = iConteService.listConteExceptLast(idAdmin);
+        modelMap.put("ListCntEx", lstCntEx);
+        Conte cnt = iConteService.findById(iConteService.lastConte(idAdmin));
+        modelMap.put("LastCnt", cnt);
         modelMap.put("ListCnt", lstCnt);
         modelMap.put("idAdmin", idAdmin);
         return "Conte/GererConte";
@@ -76,6 +80,10 @@ public class ControllerGererConte {
             } else {
                 modelMap.put("Erreur", "it's not an image try again");
                 List<Conte> lstCnt = iConteService.ListCnt(idAdmin);
+                List<Conte> lstCntEx = iConteService.listConteExceptLast(idAdmin);
+                modelMap.put("ListCntEx", lstCntEx);
+                Conte cnt = iConteService.findById(iConteService.lastConte(idAdmin));
+                modelMap.put("LastCnt", cnt);
                 modelMap.put("ListCnt", lstCnt);
                 modelMap.put("idAdmin", idAdmin);
                 return "Conte/GererConte";
@@ -106,6 +114,10 @@ public class ControllerGererConte {
             if (iConteService.ajouter(conte)) {
                 System.out.println("Ajouter avec succe");
                 List<Conte> lstCnt = iConteService.ListCnt(idAdmin);
+                List<Conte> lstCntEx = iConteService.listConteExceptLast(idAdmin);
+                modelMap.put("ListCntEx", lstCntEx);
+                Conte cnt = iConteService.findById(iConteService.lastConte(idAdmin));
+                modelMap.put("LastCnt", cnt);
                 modelMap.put("ListCnt", lstCnt);
                 modelMap.put("idAdmin", idAdmin);
                 return "Conte/GererConte";
@@ -113,6 +125,10 @@ public class ControllerGererConte {
             modelMap.put("Erreur", "Verifier Tout les champs il ya un erreur");
             List<Conte> lstCnt = iConteService.ListCnt(idAdmin);
             modelMap.put("ListCnt", lstCnt);
+            List<Conte> lstCntEx = iConteService.listConteExceptLast(idAdmin);
+            modelMap.put("ListCntEx", lstCntEx);
+            Conte cnt = iConteService.findById(iConteService.lastConte(idAdmin));
+            modelMap.put("LastCnt", cnt);
             modelMap.put("idAdmin", idAdmin);
             return "Conte/GererConte";
         } catch (Exception e) {
@@ -133,6 +149,10 @@ public class ControllerGererConte {
         //**************** Liste Mediascene *************
         List<Mediascene> lstMs = iMediasceneService.ListMs(idConte);
         //************************  ***********************
+        List<Conte> lstCntEx = iConteService.listConteExceptLast(idAdmin);
+        modelMap.put("ListCntEx", lstCntEx);
+        Conte cnte = iConteService.findById(iConteService.lastConte(idAdmin));
+        modelMap.put("LastCnt", cnte);
         modelMap.put("ListCnt", lstCnt);
         modelMap.put("idConte", idConte);
         modelMap.put("listMs", lstMs);
@@ -149,6 +169,10 @@ public class ControllerGererConte {
                          ModelMap modelMap) {
         Conte cnt = iConteService.findById(idConte);
         List<Conte> lstCnt = iConteService.ListCnt(idAdmin);
+        List<Conte> lstCntEx = iConteService.listConteExceptLast(idAdmin);
+        modelMap.put("ListCntEx", lstCntEx);
+        Conte cnte = iConteService.findById(iConteService.lastConte(idAdmin));
+        modelMap.put("LastCnt", cnte);
         modelMap.put("ListCnt", lstCnt);
         modelMap.put("idAdmin", idAdmin);
         modelMap.put("idConte", idConte);
@@ -163,6 +187,10 @@ public class ControllerGererConte {
                                 ModelMap modelMap) {
         List<Conte> lstCnt = iConteService.ListCnt(idAdmin);
         modelMap.put("ListCnt", lstCnt);
+        List<Conte> lstCntEx = iConteService.listConteExceptLast(idAdmin);
+        modelMap.put("ListCntEx", lstCntEx);
+        Conte cnt = iConteService.findById(iConteService.lastConte(idAdmin));
+        modelMap.put("LastCnt", cnt);
         modelMap.put("idAdmin", idAdmin);
         return "Conte/GererConte";
     }
@@ -200,6 +228,10 @@ public class ControllerGererConte {
             List<Conte> lstCnt = iConteService.ListCnt(idAdmin);
             modelMap.put("ListCnt", lstCnt);
             modelMap.put("idAdmin", idAdmin);
+            List<Conte> lstCntEx = iConteService.listConteExceptLast(idAdmin);
+            modelMap.put("ListCntEx", lstCntEx);
+            Conte cnte = iConteService.findById(iConteService.lastConte(idAdmin));
+            modelMap.put("LastCnt", cnte);
             return "Conte/GererConte";
         } else {
             return "Erreur";
@@ -214,8 +246,12 @@ public class ControllerGererConte {
         Conte cnt = iConteService.findById(Integer.parseInt(idConte));
         if (iConteService.deleteConte(cnt)) {
             List<Conte> lstCnt = iConteService.ListCnt(idAdmin);
-            modelMap.put("ListCnt", lstCnt);
+            List<Conte> lstCntEx = iConteService.listConteExceptLast(idAdmin);
+            modelMap.put("ListCntEx", lstCntEx);
+            Conte cnte = iConteService.findById(iConteService.lastConte(idAdmin));
+            modelMap.put("LastCnt", cnte);
             modelMap.put("idAdmin", idAdmin);
+            modelMap.put("ListCnt", lstCnt);
             return "Conte/GererConte";
         } else {
             return "Erreur";
@@ -233,7 +269,10 @@ public class ControllerGererConte {
         List<Mediascene> lstMs = iMediasceneService.ListMs(idConte);
         Mediascene m = new Mediascene();
         Question q = new Question();
-        //if ((q.getMediasceneByIdMediascene().getIdMediascene()+1)==m.getIdMediascene()){}
+        List<Conte> lstCntEx = iConteService.listConteExceptLast(idAdmin);
+        modelMap.put("ListCntEx", lstCntEx);
+        Conte cnte = iConteService.findById(iConteService.lastConte(idAdmin));
+        modelMap.put("LastCnt", cnte);
         modelMap.put("idConte", idConte);
         modelMap.put("idAdmin", idAdmin);
         modelMap.put("listMs", lstMs);
@@ -250,6 +289,10 @@ public class ControllerGererConte {
                               ModelMap modelMap) {
         Conte cnt = iConteService.findById(idConte);
         List<Conte> lstcnt = iConteService.ListCnt(idAdmin);
+        List<Conte> lstCntEx = iConteService.listConteExceptLast(idAdmin);
+        modelMap.put("ListCntEx", lstCntEx);
+        Conte cnte = iConteService.findById(iConteService.lastConte(idAdmin));
+        modelMap.put("LastCnt", cnte);
         List<Question> lstQs = iQuestionService.ListQs(idConte);
         List<Mediascene> lstMs = iMediasceneService.ListMs(idConte);
         List<Categories> lstCat = iCategorieService.listCat();

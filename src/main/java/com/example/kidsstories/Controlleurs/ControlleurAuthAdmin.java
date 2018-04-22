@@ -40,6 +40,10 @@ public class ControlleurAuthAdmin {
             modelMap.put("idAdmin", idAdmin);
             List<Conte> lstCnt = iConteService.ListCnt(idAdmin);
             modelMap.put("ListCnt", lstCnt);
+            List<Conte> lstCntEx = iConteService.listConteExceptLast(idAdmin);
+            modelMap.put("ListCntEx", lstCntEx);
+            Conte cnt = iConteService.findById(iConteService.lastConte(idAdmin));
+            modelMap.put("LastCnt", cnt);
             return "Conte/GererConte";
         } else {
             modelMap.put("notExist", "Verifier votre nom et/ou votre mot de passe");

@@ -19,4 +19,8 @@ public interface IConteService {
     Boolean updateConte(Conte idConte);
 
     List<Conte> listAllConte();
+
+    List<Conte> listConteExceptLast(int idAdmin);
+
+    int lastConte(int idAdmin);
 }
