@@ -11,7 +11,6 @@ import java.util.Objects;
 public class Question {
     private int idQuestion;
     private String titre;
-    private String reponse;
     private byte[] image;
     private int idConte;
     private int idCategories;
@@ -39,16 +38,6 @@ public class Question {
 
     public void setTitre(String titre) {
         this.titre = titre;
-    }
-
-    @Basic
-    @Column(name = "reponse", nullable = false, length = 50)
-    public String getReponse() {
-        return reponse;
-    }
-
-    public void setReponse(String reponse) {
-        this.reponse = reponse;
     }
 
     @Basic
@@ -101,14 +90,13 @@ public class Question {
                 idCategories == question.idCategories &&
                 idMediascene == question.idMediascene &&
                 Objects.equals(titre, question.titre) &&
-                Objects.equals(reponse, question.reponse) &&
                 Arrays.equals(image, question.image);
     }
 
     @Override
     public int hashCode() {
 
-        int result = Objects.hash(idQuestion, titre, reponse, idConte, idCategories, idMediascene);
+        int result = Objects.hash(idQuestion, titre, idConte, idCategories, idMediascene);
         result = 31 * result + Arrays.hashCode(image);
         return result;
     }

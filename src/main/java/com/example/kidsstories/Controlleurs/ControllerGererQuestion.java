@@ -55,7 +55,7 @@ public class ControllerGererQuestion {
             question.setTitre(titreQs);
             question.setIdConte(idConte);
             question.setIdCategories(categorie);
-            question.setReponse(reponseQs);
+            //question.setReponse(reponseQs);
             question.setIdMediascene(meds);
             String type = imgPage.getContentType().split("/")[0];
             if (type.equals("image")) {
@@ -167,7 +167,7 @@ public class ControllerGererQuestion {
         Mediascene mediascene = iMediasceneService.findById(question.getIdMediascene());
         modelMap.put("imgQs", question.getImage());
         modelMap.put("titreQs", question.getTitre());
-        modelMap.put("reponse", question.getReponse());
+        //modelMap.put("reponse", question.getReponse());
         modelMap.put("idCat", categories.getIdCategories());
         modelMap.put("typeCat", categories.getTypeCategories());
         modelMap.put("idMs", mediascene.getIdMediascene());
@@ -227,7 +227,7 @@ public class ControllerGererQuestion {
         question.setTitre(titre);
         question.setIdConte(idConte);
         question.setIdCategories(categorie);
-        question.setReponse(reponse);
+        //question.setReponse(reponse);
         question.setIdMediascene(meds);
         String type = newimg.getContentType().split("/")[0];
         if (type.equals("image")) {

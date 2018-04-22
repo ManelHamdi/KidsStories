@@ -108,7 +108,15 @@
         </select>
         <br/><br/>
 
-        <input class="text" placeholder="Reponse Question" name="reponseQs" type="text" required="">
+        <!--<input type="checkbox" name="r1" value="r1">-->
+        <input type="radio" name="rep" value="r1">
+        <input class="text" placeholder="Proposition 1" name="reponseQs" type="text" required=""><br/>
+        <input type="radio" name="rep" value="r2">
+        <input class="text" placeholder="Proposition 2" name="reponseQs" type="text" required=""><br/>
+        <input type="radio" name="rep" value="r3">
+        <input class="text" placeholder="Proposition 3" name="reponseQs" type="text" required=""><br/>
+
+
         <br/>
         <h3 th:text="${Erreur}" style="color:red"></h3>
 
