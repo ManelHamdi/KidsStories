@@ -138,6 +138,7 @@ public class ControllerGererConte {
         modelMap.put("listMs", lstMs);
         modelMap.put("idAdmin", idAdmin);
         modelMap.put("titre", cnt.getTitre());
+        modelMap.put("conte", cnt);
         modelMap.put("img", cnt.getImgconte());
         return "Conte/GererMediascene";
     }
@@ -151,6 +152,7 @@ public class ControllerGererConte {
         modelMap.put("ListCnt", lstCnt);
         modelMap.put("idAdmin", idAdmin);
         modelMap.put("idConte", idConte);
+        modelMap.put("conte", cnt);
         modelMap.put("titre", cnt.getTitre());
         modelMap.put("img", cnt.getImgconte());
         return "Conte/modifierConte";
@@ -225,6 +227,7 @@ public class ControllerGererConte {
     public String PlayCnt(ModelMap modelMap,
                           @RequestParam int idConte,
                           @RequestParam int idAdmin) {
+
         Conte cnt = iConteService.findById(idConte);
         List<Question> lstQs = iQuestionService.ListQs(idConte);
         List<Mediascene> lstMs = iMediasceneService.ListMs(idConte);
@@ -235,6 +238,7 @@ public class ControllerGererConte {
         modelMap.put("idAdmin", idAdmin);
         modelMap.put("listMs", lstMs);
         modelMap.put("titre", cnt.getTitre());
+        modelMap.put("conte", cnt);
         modelMap.put("img", cnt.getImgconte());
         modelMap.put("lstQs", lstQs);
         return "Conte/PlayConte";
@@ -252,6 +256,7 @@ public class ControllerGererConte {
         modelMap.put("idConte", idConte);
         modelMap.put("idAdmin", idAdmin);
         modelMap.put("titre", cnt.getTitre());
+        modelMap.put("conte", cnt);
         modelMap.put("img", cnt.getImgconte());
         modelMap.put("lstQs", lstQs);
         modelMap.put("listMs", lstMs);

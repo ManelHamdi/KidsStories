@@ -7,6 +7,7 @@
         <property name="connection.url">jdbc:mysql://localhost:3306/kidstory</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="connection.username">root</property>
+        <property name="hibernate.enable_lazy_load_no_trans">true</property>
         <mapping class="com.example.kidsstories.Entities.Administrateur"/>
         <mapping class="com.example.kidsstories.Entities.Categories"/>
         <mapping class="com.example.kidsstories.Entities.Conte"/>

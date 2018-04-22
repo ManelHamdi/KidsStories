@@ -87,13 +87,32 @@
             <img th:src="@{'data:image/jpg;base64,' +
     *{T(org.springframework.util.Base64Utils).encodeToString(lstCnt.imgconte)}}" style="width:100%"/>
             <h3 th:text="${lstCnt.titre}" style="margin: 0px; font-size: 12px">titre de Conte</h3>
-            <p>
+
+            <!-- **************** teste if empty not Question ************* -->
+
+            <p th:if="${lstCnt.getMediascenesByIdConte().isEmpty()}">
+                <button type="submit" name="gererMs" class="btnGm">MediaScene</button>
+            </p>
+
+            <!-- **************** teste if not empty Question ************* -->
+
+            <p th:if="${!lstCnt.getMediascenesByIdConte().isEmpty()}">
                 <button type="submit" name="gererMs" class="btnGm">MediaScene</button>
                 <button type="submit" name="gererQuestion" class="btnGp">Question</button>
             </p>
-            <button type="submit" name="mod" class="btnMod"> Modifier</button>
-            <button type="submit" name="play" class="btnPlay">Play</button>
-            <p>
+
+            <!-- **************** teste if empty not play ************* -->
+
+            <p th:if="${lstCnt.getMediascenesByIdConte().isEmpty()}">
+                <button type="submit" name="mod" class="btnMod"> Modifier</button>
+            </p>
+
+            <!-- **************** teste if not empty play ************* -->
+
+            <p th:if="${!lstCnt.getMediascenesByIdConte().isEmpty()}">
+                <button type="submit" name="mod" class="btnMod"> Modifier</button>
+                <button type="submit" name="play" class="btnPlay">Play</button>
+            </p>
                 <button type="submit" name="supprimer" class="btnsupp">Supprimer</button>
             </p>
 

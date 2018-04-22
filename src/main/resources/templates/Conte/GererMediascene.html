@@ -95,7 +95,9 @@
                 <form action="/GererConte" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="idConte" th:value="${idConte}">
                     <input type="hidden" name="idAdmin" th:value="${idAdmin}">
-                    <button type="submit" name="play" class="btnAjoutermt">Play</button>
+                    <p th:if="${!conte.getMediascenesByIdConte().isEmpty()}">
+                        <button type="submit" name="play" class="btnAjoutermt">Play</button>
+                    </p>
                 </form>
 
             </div>

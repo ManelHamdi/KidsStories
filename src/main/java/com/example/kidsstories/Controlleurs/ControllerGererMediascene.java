@@ -84,6 +84,7 @@ public class ControllerGererMediascene {
                 modelMap.put("listMs", lstMs);
                 modelMap.put("idAdmin", idAdmin);
                 modelMap.put("titre", cnt.getTitre());
+                modelMap.put("conte", cnt);
                 modelMap.put("img", cnt.getImgconte());
                 return "Conte/GererMediascene";
             }
@@ -97,6 +98,7 @@ public class ControllerGererMediascene {
             modelMap.put("idConte", idConte);
             modelMap.put("listMs", lstMs);
             modelMap.put("idAdmin", idAdmin);
+            modelMap.put("conte", cnt);
             modelMap.put("titre", cnt.getTitre());
             modelMap.put("img", cnt.getImgconte());
             return "Conte/GererMediascene";
@@ -114,6 +116,7 @@ public class ControllerGererMediascene {
                                  ModelMap modelMap) {
         Conte cnt = iConteService.findById(idConte);
         modelMap.put("titre", cnt.getTitre());
+        modelMap.put("conte", cnt);
         modelMap.put("img", cnt.getImgconte());
         //**************** Liste Conte ******************
         List<Conte> lstCnt = iConteService.ListCnt(idAdmin);
@@ -179,6 +182,7 @@ public class ControllerGererMediascene {
             modelMap.put("idConte", idConte);
             modelMap.put("listMs", lstMs);
             modelMap.put("idAdmin", idAdmin);
+            modelMap.put("conte", cnt);
             modelMap.put("titre", cnt.getTitre());
             modelMap.put("img", cnt.getImgconte());
             return "Conte/GererMediascene";
@@ -208,6 +212,7 @@ public class ControllerGererMediascene {
             modelMap.put("listMs", lstMs);
             modelMap.put("idAdmin", idAdmin);
             modelMap.put("titre", cnt.getTitre());
+            modelMap.put("conte", cnt);
             modelMap.put("img", cnt.getImgconte());
             return "Conte/GererMediascene";
         } else {
@@ -239,6 +244,7 @@ public class ControllerGererMediascene {
         modelMap.put("listMs", lstMs);
         modelMap.put("idAdmin", idAdmin);
         modelMap.put("titre", cnt.getTitre());
+        modelMap.put("conte", cnt);
         modelMap.put("img", cnt.getImgconte());
         return "Conte/modifierMediascene";
 

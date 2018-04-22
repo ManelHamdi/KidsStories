@@ -17,4 +17,6 @@ public interface IMediasceneService {
     Mediascene findById(int idMs);
 
     Boolean updateMs(Mediascene mediascene);
+
+    Boolean ifMeds(int idcnt);
 }

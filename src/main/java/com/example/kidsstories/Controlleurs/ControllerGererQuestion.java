@@ -70,6 +70,7 @@ public class ControllerGererQuestion {
                 modelMap.put("idConte", idConte);
                 modelMap.put("idAdmin", idAdmin);
                 modelMap.put("titre", cnt.getTitre());
+                modelMap.put("conte", cnt);
                 modelMap.put("img", cnt.getImgconte());
                 modelMap.put("lstQs", lstQs);
                 modelMap.put("listMs", lstMs);
@@ -111,6 +112,7 @@ public class ControllerGererQuestion {
                 modelMap.put("idConte", idConte);
                 modelMap.put("idAdmin", idAdmin);
                 modelMap.put("titre", cnt.getTitre());
+                modelMap.put("conte", cnt);
                 modelMap.put("img", cnt.getImgconte());
                 modelMap.put("lstQs", lstQs);
                 modelMap.put("listMs", lstMs);
@@ -142,6 +144,7 @@ public class ControllerGererQuestion {
             List<Categories> lstCat = iCategorieService.listCat();
             modelMap.put("idAdmin", idAdmin);
             modelMap.put("titre", cnt.getTitre());
+            modelMap.put("conte", cnt);
             modelMap.put("img", cnt.getImgconte());
             modelMap.put("lstQs", lstQs);
             modelMap.put("listMs", lstMs);
@@ -178,6 +181,7 @@ public class ControllerGererQuestion {
         List<Categories> lstCat = iCategorieService.listCat();
         modelMap.put("idAdmin", idAdmin);
         modelMap.put("titre", cnt.getTitre());
+        modelMap.put("conte", cnt);
         modelMap.put("img", cnt.getImgconte());
         modelMap.put("lstQs", lstQs);
         modelMap.put("listMs", lstMs);
@@ -200,6 +204,7 @@ public class ControllerGererQuestion {
         List<Categories> lstCat = iCategorieService.listCat();
         modelMap.put("idAdmin", idAdmin);
         modelMap.put("titre", cnt.getTitre());
+        modelMap.put("conte", cnt);
         modelMap.put("img", cnt.getImgconte());
         modelMap.put("lstQs", lstQs);
         modelMap.put("listMs", lstMs);
@@ -265,6 +270,7 @@ public class ControllerGererQuestion {
             List<Categories> lstCat = iCategorieService.listCat();
             modelMap.put("idAdmin", idAdmin);
             modelMap.put("titre", cnt.getTitre());
+            modelMap.put("conte", cnt);
             modelMap.put("img", cnt.getImgconte());
             modelMap.put("lstQs", lstQs);
             modelMap.put("listMs", lstMs);
