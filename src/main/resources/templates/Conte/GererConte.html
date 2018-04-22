@@ -39,13 +39,14 @@
 
 </head>
 <body id="body">
+<!-- ******************* Logo ************** -->
 <form action="/GererConte" method="post" enctype="multipart/form-data">
     <input type="hidden" name="idAdmin" th:value="${idAdmin}">
     <input type="hidden" name="idConte" th:value="${idConte}">
-    <button type="submit" name="index" style="width: 20%;border-radius: 5%;background-color: white"><img
-            src="images/logo.png" width="100%"></button>
-    <button type="submit" name="logout" style="width: 5%;border-radius: 20%;background-color: white"><img
-            src="images/logOut.png" width="100%"></button>
+    <button type="submit" name="index" style="width: 180px;border-radius: 5%;background-color: white">
+        <img src="images/logo.png" width="100%"></button>
+    <button type="submit" name="logout" style="width: 50px;border-radius: 20%;background-color: white">
+        <img src="images/logOut.png" width="100%"></button>
 </form>
 <br/>
 <br/>
@@ -54,7 +55,6 @@
           title="Type in a name">
     <button class="btnCreer" onclick="hiddenShow()">Creer nouvelle Conte</button>
 </p>
-<br/>
 <h3 th:text="${Erreur}" style="color:red"></h3>
 
 <!-- ************** creation de conte *************** -->
@@ -73,7 +73,6 @@
 </div>
 <br/><br/>
 
-
 <!-- Liste des contes -->
 
 
@@ -86,8 +85,8 @@
             <input type="hidden" name="idAdmin" th:value="${idAdmin}">
 
             <img th:src="@{'data:image/jpg;base64,' +
-    *{T(org.springframework.util.Base64Utils).encodeToString(lstCnt.imgconte)}}" style="width:100%">
-            <h3 th:text="${lstCnt.titre}">titre de Conte</h3>
+    *{T(org.springframework.util.Base64Utils).encodeToString(lstCnt.imgconte)}}" style="width:100%"/>
+            <h3 th:text="${lstCnt.titre}" style="margin: 0px; font-size: 12px">titre de Conte</h3>
             <p>
                 <button type="submit" name="gererMs" class="btnGm">MediaScene</button>
                 <button type="submit" name="gererQuestion" class="btnGp">Question</button>

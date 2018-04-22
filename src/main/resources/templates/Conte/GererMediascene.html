@@ -66,73 +66,40 @@
 
 </head>
 <body class="body2" id="body">
-
-<table width="100%">
+<table width="40%" style="float: left">
     <tr>
         <td>
+            <!-- ******************* Logo ************** -->
             <form action="/GererConte" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="idAdmin" th:value="${idAdmin}">
                 <input type="hidden" name="idConte" th:value="${idConte}">
-                <button type="submit" name="index" style="width: 60%;border-radius: 5%;background-color: white"><img
-                        src="images/logo.png" width="100%"></button>
-                <button type="submit" name="logout" style="width: 15%;border-radius: 20%;background-color: white"><img
-                        src="images/logOut.png" width="100%"></button>
+                <button type="submit" name="index" style="width: 180px;border-radius: 5%;background-color: white">
+                    <img src="images/logo.png" width="100%"></button>
+                <button type="submit" name="logout" style="width: 50px;border-radius: 20%;background-color: white">
+                    <img src="images/logOut.png" width="100%"></button>
             </form>
-
-        </td>
-        <td rowspan="2" width="70%">
-            <input class="search2" type="text" id="search2" onkeyup="myFunction()"
-                   placeholder="Rechercher Titre Conte..." title="Type in a name"><br/>
-            <table class="tt">
-                <tr>
-                    <td>
-                        <!-- ************************ Liste Conte ******************** -->
-                        <div class="cardm" th:each="lstCnt: ${ListCnt}">
-                            <form action="/GererConte" method="post" enctype="multipart/form-data">
-                                <input type="hidden" name="idAdmin" th:value="${idAdmin}">
-                                <input type="hidden" name="idConte" th:value="${lstCnt.idConte}">
-
-                                <img th:src="@{'data:image/jpg;base64,' +
-            *{T(org.springframework.util.Base64Utils).encodeToString(lstCnt.imgconte)}}" style="width:100%">
-                                <h5 th:text="${lstCnt.titre}">titre de conte</h5>
-
-                                <button type="submit" name="gererMs" class="btnAjouterm">Gerer MediaScene</button>
-                                <br/><br/>
-
-                            </form>
-
-                        </div>
-
-
-                    </td>
-                </tr>
-            </table>
         </td>
     </tr>
-
     <tr>
         <td>
             <!-- ************************ Conte ******************** -->
             <div class="cardt">
-                <!-- <form action="/GererMs" method="post" enctype="multipart/form-data">
-                     <input type="hidden" name="idAdmin" th:value="${idAdmin}">
-                     <input type="hidden" name="idConte" th:value="${idConte}">-->
-
                 <img th:src="@{'data:image/jpg;base64,' +
             *{T(org.springframework.util.Base64Utils).encodeToString(img)}}" style="width:100%">
 
-                <h5 th:text="${titre}">titre de Conte</h5>
+                <h4 th:text="${titre}" style="margin: 5px">titre de Conte</h4>
 
                 <button type="submit" name="ajouMs" class="btnAjoutermt" onclick="hiddenShow()">Nouvelle MediaScene
                 </button>
-                <br/><br/>
+
                 <form action="/GererConte" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="idConte" th:value="${idConte}">
                     <input type="hidden" name="idAdmin" th:value="${idAdmin}">
                     <button type="submit" name="play" class="btnAjoutermt">Play</button>
-                    <br/><br/>
                 </form>
+
             </div>
+
         </td>
     </tr>
 </table>
@@ -164,7 +131,6 @@
 </div>
 <br/><br/>
 
-
 <!-- ************************ Liste MediaScene ******************** -->
 
 
@@ -182,13 +148,13 @@
             <img th:src="@{'data:image/jpg;base64,' +
             *{T(org.springframework.util.Base64Utils).encodeToString(lstMs.img)}}" style="width:100%">
             <!-- ***************** Audio ************** -->
-            <audio controls style="width: 180px;">
+            <audio controls style="width: 100%;">
                 <source th:src="@{'data:audio/mp3;base64,' +
                 *{T(org.springframework.util.Base64Utils).encodeToString(lstMs.audio)}}"
                         type="audio/mpeg">
             </audio>
             <!-- **************** Texte *************** -->
-            <h5 th:text="${lstMs.texte}">texte de Mediascene</h5>
+            <h5 th:text="${lstMs.texte}" style="margin: 0px">texte de Mediascene</h5>
 
             <p>
                 <button type="submit" name="modi" class="btnAjouter">Modifier MediaScene</button>

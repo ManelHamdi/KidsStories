@@ -12,6 +12,7 @@
         <mapping class="com.example.kidsstories.Entities.Conte"/>
         <mapping class="com.example.kidsstories.Entities.Mediascene"/>
         <mapping class="com.example.kidsstories.Entities.Question"/>
+        <mapping class="com.example.kidsstories.Entities.Reponse"/>
         <!-- <property name="connection.username"/> -->
         <!-- <property name="connection.password"/> -->
 

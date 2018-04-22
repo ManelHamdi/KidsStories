@@ -1,7 +1,6 @@
 package com.example.kidsstories.DAOInterfaces;
 
 import com.example.kidsstories.Entities.Mediascene;
-import com.example.kidsstories.Entities.MediasceneQuestion;
 
 import java.util.List;
 
@@ -11,5 +10,5 @@ public interface IMediasceneDAO extends IGenericDAO<Mediascene, Integer> {
 
     List<Mediascene> ListMs(int idCnt);
 
-    List<MediasceneQuestion> ListMsQs(int idCnt);
+    // List<MediasceneQuestion> ListMsQs(int idCnt);
 }

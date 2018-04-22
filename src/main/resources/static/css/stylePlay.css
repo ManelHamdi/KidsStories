@@ -21,6 +21,8 @@ body {
 .btnGc {
     border: none;
     outline: 0;
+    margin-top: 5px;
+    margin-bottom: 50px;
     display: inline-block;
     padding: 8px;
     color: white;
@@ -33,7 +35,7 @@ body {
 
 .cardm {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    width: 40%;
+    width: 70%;
     text-align: center;
     margin-left: 20%
 }

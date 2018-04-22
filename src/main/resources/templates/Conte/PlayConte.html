@@ -9,13 +9,14 @@
 
 
 <head>
+    <!-- ******************* Logo ************** -->
     <form action="/GererConte" method="post" enctype="multipart/form-data">
         <input type="hidden" name="idAdmin" th:value="${idAdmin}">
         <input type="hidden" name="idConte" th:value="${idConte}">
-        <button type="submit" name="index" style="width: 20%;border-radius: 5%;background-color: white"><img
-                src="images/logo.png" width="100%"></button>
-        <button type="submit" name="logout" style="width: 5%;border-radius: 20%;background-color: white"><img
-                src="images/logOut.png" width="100%"></button>
+        <button type="submit" name="index" style="width: 190px;border-radius: 5%;background-color: white">
+            <img src="images/logo.png" width="100%"></button>
+        <button type="submit" name="logout" style="width: 55px;border-radius: 20%;background-color: white">
+            <img src="images/logOut.png" width="100%"></button>
     </form>
 </head>
 <body>
@@ -25,7 +26,7 @@
     <tr>
         <td width="30%">
 
-            <div class="cardm">
+            <div class="cardm" style="width: 50%">
                 <!-- **************** Conte ************************** -->
                 <form action="/GererConte" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="idConte" th:value="${idConte}">
@@ -33,10 +34,12 @@
 
                     <img th:src="@{'data:image/jpg;base64,' +
     *{T(org.springframework.util.Base64Utils).encodeToString(img)}}" style="width:100%">
-                    <h3 th:text="${titre}">titre de Conte</h3>
+                    <p th:text="${titre}" style="margin: 1px">titre de Conte</p>
                     <p>
-                        <input class="btnGc" type="submit" name="gererMs" value="Mediascene"><br/><br/>
-                        <input class="btnGc" type="submit" name="gererQuestion" value="Question"><br/><br/>
+                        <input class="btnGc" type="submit" name="gererMs" value="Mediascene"
+                               style="margin-bottom: 15px">
+                        <input class="btnGc" type="submit" name="gererQuestion" value="Question"
+                               style="margin-bottom: 15px">
                     </p>
 
                 </form>

@@ -1,7 +1,10 @@
 package com.example.kidsstories.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -16,6 +19,7 @@ public class Question {
     private Conte conteByIdConte;
     private Categories categoriesByIdCategories;
     private Mediascene mediasceneByIdMediascene;
+    private Collection<Reponse> reponsesByIdQuestion;
 
     @Id
     @Column(name = "id_question", nullable = false)
@@ -137,5 +141,15 @@ public class Question {
 
     public void setMediasceneByIdMediascene(Mediascene mediasceneByIdMediascene) {
         this.mediasceneByIdMediascene = mediasceneByIdMediascene;
+    }
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "questionByIdQuestion")
+    public Collection<Reponse> getReponsesByIdQuestion() {
+        return reponsesByIdQuestion;
+    }
+
+    public void setReponsesByIdQuestion(Collection<Reponse> reponsesByIdQuestion) {
+        this.reponsesByIdQuestion = reponsesByIdQuestion;
     }
 }

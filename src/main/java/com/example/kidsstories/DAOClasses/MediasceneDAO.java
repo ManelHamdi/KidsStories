@@ -2,7 +2,6 @@ package com.example.kidsstories.DAOClasses;
 
 import com.example.kidsstories.DAOInterfaces.IMediasceneDAO;
 import com.example.kidsstories.Entities.Mediascene;
-import com.example.kidsstories.Entities.MediasceneQuestion;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -53,7 +52,7 @@ public class MediasceneDAO extends GenericDAO<Mediascene, Integer> implements IM
         return results;
     }
 
-    @Override
+    /*@Override
     public List<MediasceneQuestion> ListMsQs(int idCnt) {
         List<MediasceneQuestion> results = null;
         try {
@@ -64,5 +63,5 @@ public class MediasceneDAO extends GenericDAO<Mediascene, Integer> implements IM
             System.err.println("Erreur Dans mediascene dao find all ms by idcnt : \n" + ex.getMessage());
         }
         return results;
-    }
+    }*/
 }
