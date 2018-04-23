@@ -86,7 +86,7 @@ public class ControllerGererConte {
                 modelMap.put("LastCnt", cnt);
                 modelMap.put("ListCnt", lstCnt);
                 modelMap.put("idAdmin", idAdmin);
-                return "Conte/GererConte";
+                return "Conte/GererContec";
             }
             System.out.println("get request method " + imgCnt.getContentType());
 
@@ -120,7 +120,7 @@ public class ControllerGererConte {
                 modelMap.put("LastCnt", cnt);
                 modelMap.put("ListCnt", lstCnt);
                 modelMap.put("idAdmin", idAdmin);
-                return "Conte/GererConte";
+                return "Conte/GererContec";
             }
             modelMap.put("Erreur", "Verifier Tout les champs il ya un erreur");
             List<Conte> lstCnt = iConteService.ListCnt(idAdmin);
@@ -130,7 +130,7 @@ public class ControllerGererConte {
             Conte cnt = iConteService.findById(iConteService.lastConte(idAdmin));
             modelMap.put("LastCnt", cnt);
             modelMap.put("idAdmin", idAdmin);
-            return "Conte/GererConte";
+            return "Conte/GererContec";
         } catch (Exception e) {
             System.out.println("il ya un erreur contelayoute:" + e);
             modelMap.put("Erreur", e);
