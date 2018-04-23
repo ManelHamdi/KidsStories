@@ -74,6 +74,16 @@ body {
     display: none;
 }
 
+.cardhidden2c {
+    background-color: #F7F9F9;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 70%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+}
+
 .cardhiddenMod {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     width: 20%;
@@ -228,6 +238,33 @@ a {
     text-align: center;
     cursor: pointer;
     width: 40%;
+    font-size: 15px;
+}
+
+.btnVm, .btnRm {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #ff8000;
+    text-align: center;
+    cursor: pointer;
+    width: 25%;
+    font-size: 15px;
+}
+
+.btnVs {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    margin-top: 5px;
+    background-color: #00b33c;
+    text-align: center;
+    cursor: pointer;
+    width: 50%;
     font-size: 15px;
 }
 

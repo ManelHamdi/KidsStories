@@ -250,4 +250,85 @@ public class ControllerGererMediascene {
 
 
     }
+
+    @RequestMapping(value = "/GererMs", params = "ajouterMss", method = RequestMethod.POST)
+    public String CreerMss(@RequestParam MultipartFile imgPage,
+                           @RequestParam MultipartFile audioPage,
+                           @RequestParam String txtPage,
+                           @RequestParam int idConte,
+                           ModelMap modelMap,
+                           @RequestParam int idAdmin) {
+        try {
+            Mediascene mediascene = new Mediascene();
+            mediascene.setTexte(txtPage);
+            mediascene.setIdConte(idConte);
+            mediascene.setAudio(audioPage.getBytes());
+            mediascene.setNumOrdre(iMediasceneService.NumOrd(idConte));
+            String type = imgPage.getContentType().split("/")[0];
+            String typeaudio = audioPage.getContentType().split("/")[0];
+            if (typeaudio.equals("audio")) {
+                mediascene.setAudio(audioPage.getBytes());
+            } else {
+                modelMap.put("Erreur", "it's not an audio file");
+                return "Erreur";
+            }
+            if (type.equals("image")) {
+                System.out.println("It's an image");
+            } else {
+                modelMap.put("Erreur", "it's not an image");
+                return "Erreur";
+            }
+            InputStream in = new ByteArrayInputStream(imgPage.getBytes());
+            BufferedImage bimg = ImageIO.read(in);
+            Image newImage = bimg.getScaledInstance(400, 400, Image.SCALE_DEFAULT);
+            //***************convert to bytes***********
+            InputStream inn = new ByteArrayInputStream(imgPage.getBytes());
+            BufferedImage bbbImage = new BufferedImage(
+                    newImage.getWidth(null), newImage.getHeight(null),
+                    BufferedImage.TYPE_INT_RGB);
+            Graphics2D g = bbbImage.createGraphics();
+            g.drawImage(newImage, 0, 0, null);
+            g.dispose();
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(bbbImage, "jpg", baos);
+            byte[] imageInByte = baos.toByteArray();
+            mediascene.setImg(imageInByte);
+            if (iMediasceneService.ajouter(mediascene)) {
+                System.out.println("Ajouter avec succe");
+                List<Conte> lstCnt = iConteService.ListCnt(idAdmin);
+                Conte cnt = iConteService.findById(idConte);
+                //**************** Liste Mediascene *************
+                List<Mediascene> lstMs = iMediasceneService.ListMs(idConte);
+                //************************  ***********************
+                modelMap.put("ListCnt", lstCnt);
+                modelMap.put("idConte", idConte);
+                modelMap.put("listMs", lstMs);
+                modelMap.put("idAdmin", idAdmin);
+                modelMap.put("titre", cnt.getTitre());
+                modelMap.put("conte", cnt);
+                modelMap.put("img", cnt.getImgconte());
+                return "Conte/GererMediascenec";
+            }
+            modelMap.put("Erreur", "Verifier Tout les champs il ya un erreur");
+            List<Conte> lstCnt = iConteService.ListCnt(idAdmin);
+            Conte cnt = iConteService.findById(idConte);
+            //**************** Liste Mediascene *************
+            List<Mediascene> lstMs = iMediasceneService.ListMs(idConte);
+            //************************  ***********************
+            modelMap.put("ListCnt", lstCnt);
+            modelMap.put("idConte", idConte);
+            modelMap.put("listMs", lstMs);
+            modelMap.put("idAdmin", idAdmin);
+            modelMap.put("conte", cnt);
+            modelMap.put("titre", cnt.getTitre());
+            modelMap.put("img", cnt.getImgconte());
+            return "Conte/GererMediascene";
+        } catch (Exception e) {
+            System.out.println("il ya un erreur contelayoute:" + e);
+            modelMap.put("Erreur", e);
+            return "Erreur";
+        }
+
+    }
+
 }
