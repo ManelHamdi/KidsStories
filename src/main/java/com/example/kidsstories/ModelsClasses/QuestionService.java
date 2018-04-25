@@ -70,4 +70,17 @@ public class QuestionService implements IQuestionService {
             return false;
         }
     }
+
+    @Override
+    public int mexIdQuestion(int idCnt) {
+        int results = 0;
+        try {
+            Session session = sessionFactory.openSession();
+            results = (int) session.createQuery("select (max(q.idQuestion)) from Question q where q.idConte = " + idCnt).uniqueResult();
+            session.close();
+        } catch (Exception ex) {
+            System.err.println("Erreur Dans mediascene dao find all ms by idcnt : \n" + ex.getMessage());
+        }
+        return results;
+    }
 }

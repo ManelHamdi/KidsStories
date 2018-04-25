@@ -88,19 +88,19 @@
         <input class="text" placeholder="Question" name="titreQs" type="text" required="">
         <br/><br/>
 
-        Choisir un image
+        Image
         <input placeholder="Image" name="imgPage" type="file">
         <br/><br/>
 
-        Choisir un Categories
+        <!--Choisir un Categories
         <select name="categorie">
             <option th:each="lstcat : ${LstCat}"
                     th:value="${lstcat.idCategories}"
                     th:text="${lstcat.typeCategories}"></option>
         </select>
-        <br/><br/>
+        <br/><br/>-->
 
-        Choisir Mediascene
+        Mediascene
         <select name="meds">
             <option th:each="lstmsi : ${listMs}"
                     th:value="${lstmsi.idMediascene}"
@@ -109,12 +109,27 @@
         <br/><br/>
 
         <!--<input type="checkbox" name="r1" value="r1">-->
-        <input type="radio" name="rep" value="r1">
-        <input class="text" placeholder="Proposition 1" name="reponseQs" type="text" required=""><br/>
-        <input type="radio" name="rep" value="r2">
-        <input class="text" placeholder="Proposition 2" name="reponseQs" type="text" required=""><br/>
-        <input type="radio" name="rep" value="r3">
-        <input class="text" placeholder="Proposition 3" name="reponseQs" type="text" required=""><br/>
+        <table style="margin-left: 15%; width: 70%">
+            <tr>
+                <td><p>Correct</p></td>
+                <td><p>Proposition</p></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name="correcte" value="proposition1" checked></td>
+                <td><input class="text" placeholder="Proposition 1" name="proposition1"
+                           type="text" required="" style="width: 70%"></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name="correcte" value="proposition2"></td>
+                <td><input class="text" placeholder="Proposition 2" name="proposition2"
+                           type="text" required="" style="width: 70%"></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name="correcte" value="proposition3"></td>
+                <td><input class="text" placeholder="Proposition 3" name="proposition3"
+                           type="text" required="" style="width: 70%"></td>
+            </tr>
+        </table>
 
 
         <br/>
@@ -130,7 +145,7 @@
 <!-- ************************ Liste Question ******************** -->
 
 
-<div class="cardi2" th:each="lstQs: ${lstQs}">
+<div class="cardi2q" th:each="lstQs: ${lstQs}">
 
     <div class="card">
 
@@ -139,16 +154,19 @@
             <input type="hidden" name="idAdmin" th:value="${idAdmin}">
             <input type="hidden" name="idConte" th:value="${lstQs.idConte}">
             <!-- **************** Titre Question ************ -->
-            <h7 th:text="'Question : ' + ${lstQs.titre}">Titre de question</h7>
+            <h5 style="margin: 5px" th:text="'Question : ' + ${lstQs.titre}">Titre de question</h5>
             <!-- **************** Categories et idMediascene *************** -->
-            <h5 th:text="${lstQs.getCategoriesByIdCategories().getTypeCategories()}+
-             ' apres page N° ' + ${lstQs.getMediasceneByIdMediascene().getNumOrdre()}">
+            <h5 style="margin: 5px" th:text="${' Apres page N° ' + lstQs.getMediasceneByIdMediascene().getNumOrdre()}">
                 Categories apres page n..</h5>
             <!-- **************** image *************** -->
             <img th:src="@{'data:image/jpg;base64,' +
             *{T(org.springframework.util.Base64Utils).encodeToString(lstQs.image)}}" style="width:100%">
-            <!-- **************** Reponse *************** -->
-            <h5 th:text="${lstQs.reponse}" style="margin: 0px">Reponse au question</h5>
+
+            <div th:each="crep: ${lstQs.getReponsesByIdQuestion()}">
+                <h5 style="margin: 5px" th:text="'1) ' + ${crep.getTexteReponse1()}"></h5>
+                <h5 style="margin: 5px" th:text="'2) ' + ${crep.getTexteReponse2()}"></h5>
+                <h5 style="margin: 5px" th:text="'3) ' + ${crep.getTexteReponse3()}"></h5>
+            </div>
 
             <p>
                 <button type="submit" name="modi" class="btnAjouter">Modifier Question</button>

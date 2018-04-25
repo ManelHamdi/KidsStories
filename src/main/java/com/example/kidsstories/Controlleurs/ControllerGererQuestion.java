@@ -1,13 +1,7 @@
 package com.example.kidsstories.Controlleurs;
 
-import com.example.kidsstories.Entities.Categories;
-import com.example.kidsstories.Entities.Conte;
-import com.example.kidsstories.Entities.Mediascene;
-import com.example.kidsstories.Entities.Question;
-import com.example.kidsstories.ModelInterfaces.ICategorieService;
-import com.example.kidsstories.ModelInterfaces.IConteService;
-import com.example.kidsstories.ModelInterfaces.IMediasceneService;
-import com.example.kidsstories.ModelInterfaces.IQuestionService;
+import com.example.kidsstories.Entities.*;
+import com.example.kidsstories.ModelInterfaces.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,6 +17,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -40,22 +35,33 @@ public class ControllerGererQuestion {
     @Autowired
     private ICategorieService iCategorieService;
 
+    @Autowired
+    private IReponseService iReponseService;
+
     @RequestMapping(value = "/GererQuestion", params = "ajouterQs", method = RequestMethod.POST)
     public String GererQs(@RequestParam int idAdmin,
                           @RequestParam int idConte,
                           @RequestParam String titreQs,
-                          @RequestParam int categorie,
-                          @RequestParam String reponseQs,
+                          @RequestParam String proposition1,
+                          @RequestParam String proposition2,
+                          @RequestParam String proposition3,
+                          @RequestParam String correcte,
                           @RequestParam int meds,
                           @RequestParam MultipartFile imgPage,
                           ModelMap modelMap) {
         try {
-
+            //*********** reponse **********
+            Reponse reponse = new Reponse();
+            reponse.setTexteReponse1(proposition1);
+            reponse.setTexteReponse2(proposition2);
+            reponse.setTexteReponse3(proposition3);
+            reponse.setCorrecte(correcte);
+            //*********** question ********
             Question question = new Question();
             question.setTitre(titreQs);
             question.setIdConte(idConte);
-            question.setIdCategories(categorie);
-            //question.setReponse(reponseQs);
+            //***************** categorie *********
+            question.setIdCategories(1);
             question.setIdMediascene(meds);
             String type = imgPage.getContentType().split("/")[0];
             if (type.equals("image")) {
@@ -101,9 +107,12 @@ public class ControllerGererQuestion {
             ImageIO.write(bbbImage, "jpg", baos);
             byte[] imageInByte = baos.toByteArray();
             question.setImage(imageInByte);
-
+            //***************** Create Question *******
             if (iQuestionService.ajouter(question)) {
-                System.out.println("Ajouter avec succe");
+                System.out.println("idq " + iQuestionService.mexIdQuestion(idConte));
+                reponse.setIdQuestion(iQuestionService.mexIdQuestion(idConte));
+                //************** Create Reponse ********
+                iReponseService.ajouter(reponse);
                 Conte cnt = iConteService.findById(idConte);
                 List<Conte> lstcnt = iConteService.ListCnt(idAdmin);
                 List<Question> lstQs = iQuestionService.ListQs(idConte);
@@ -121,7 +130,21 @@ public class ControllerGererQuestion {
                 return "Conte/GererQuestion";
             }
             modelMap.put("Erreur", "Verifier Tout les champs il ya un erreur");
-            return "Conte/GererConte";
+            Conte cnt = iConteService.findById(idConte);
+            List<Conte> lstcnt = iConteService.ListCnt(idAdmin);
+            List<Question> lstQs = iQuestionService.ListQs(idConte);
+            List<Mediascene> lstMs = iMediasceneService.ListMs(idConte);
+            List<Categories> lstCat = iCategorieService.listCat();
+            modelMap.put("idConte", idConte);
+            modelMap.put("idAdmin", idAdmin);
+            modelMap.put("titre", cnt.getTitre());
+            modelMap.put("conte", cnt);
+            modelMap.put("img", cnt.getImgconte());
+            modelMap.put("lstQs", lstQs);
+            modelMap.put("listMs", lstMs);
+            modelMap.put("ListCnt", lstcnt);
+            modelMap.put("LstCat", lstCat);
+            return "Conte/GererQuestion";
         } catch (Exception e) {
             System.out.println("il ya un erreur contelayoute:" + e);
             modelMap.put("Erreur", e);
@@ -162,17 +185,40 @@ public class ControllerGererQuestion {
                            @RequestParam int idAdmin,
                            @RequestParam int idQs,
                            ModelMap modelMap) {
+        String rep1 = "", rep2 = "", rep3 = "";
+        Boolean chek1 = false, chek2 = false, chek3 = false;
         Question question = iQuestionService.findQbyId(idQs);
         Categories categories = iCategorieService.findCbyId(question.getIdCategories());
         Mediascene mediascene = iMediasceneService.findById(question.getIdMediascene());
         modelMap.put("imgQs", question.getImage());
         modelMap.put("titreQs", question.getTitre());
-        //modelMap.put("reponse", question.getReponse());
+        Collection<Reponse> reponses = question.getReponsesByIdQuestion();
+        for (Reponse rep : reponses) {
+            rep1 = rep.getTexteReponse1();
+            rep2 = rep.getTexteReponse2();
+            rep3 = rep.getTexteReponse3();
+            System.out.println(rep.getCorrecte());
+            if (rep.getCorrecte().equals("proposition1")) {
+                chek1 = true;
+                System.out.println("chek1 " + chek1);
+            } else if (rep.getCorrecte().equals("proposition2")) {
+                chek2 = true;
+                System.out.println("chek2 " + chek2);
+            } else if (rep.getCorrecte().equals("proposition3")) {
+                chek3 = true;
+                System.out.println("chek3 " + chek3);
+            }
+        }
+        modelMap.put("rep1", rep1);
+        modelMap.put("rep2", rep2);
+        modelMap.put("rep3", rep3);
+        modelMap.put("chek1", chek1);
+        modelMap.put("chek2", chek2);
+        modelMap.put("chek3", chek3);
         modelMap.put("idCat", categories.getIdCategories());
         modelMap.put("typeCat", categories.getTypeCategories());
         modelMap.put("idMs", mediascene.getIdMediascene());
         modelMap.put("numP", mediascene.getNumOrdre());
-        //modelMap.put("categ", question.getIdCategories());
         Conte cnt = iConteService.findById(idConte);
         modelMap.put("idConte", idConte);
         List<Conte> lstcnt = iConteService.ListCnt(idAdmin);
@@ -217,16 +263,22 @@ public class ControllerGererQuestion {
                         @RequestParam int idConte,
                         @RequestParam int idQs,
                         @RequestParam String titre,
-                        @RequestParam int categorie,
-                        @RequestParam String reponse,
+                        @RequestParam String proposition1,
+                        @RequestParam String proposition2,
+                        @RequestParam String proposition3,
+                        @RequestParam String correcte,
                         @RequestParam int meds,
                         @RequestParam MultipartFile newimg,
                         ModelMap modelMap) throws IOException {
 
         Question question = iQuestionService.findQbyId(idQs);
+        Reponse repo = iReponseService.findRbyIdQ(idQs);
+        repo.setCorrecte(correcte);
+        repo.setTexteReponse1(proposition1);
+        repo.setTexteReponse2(proposition2);
+        repo.setTexteReponse3(proposition3);
         question.setTitre(titre);
         question.setIdConte(idConte);
-        question.setIdCategories(categorie);
         //question.setReponse(reponse);
         question.setIdMediascene(meds);
         String type = newimg.getContentType().split("/")[0];
@@ -248,18 +300,8 @@ public class ControllerGererQuestion {
             //*************** set image *************
             question.setImage(imageInByte);
         }
-        /*
-        //******************** update ************************
-        if (iConteService.updateConte(cnt)) {
-            List<Conte> lstCnt = iConteService.ListCnt(idAdmin);
-            modelMap.put("ListCnt", lstCnt);
-            modelMap.put("idAdmin", idAdmin);
-            return "Conte/GererConte";
-        } else {
-            return "Erreur";
-        }
-         */
         if (iQuestionService.updateQs(question)) {
+            iReponseService.updateQs(repo);
             //general return
             List<Conte> lstcnt = iConteService.ListCnt(idAdmin);
             modelMap.put("ListCnt", lstcnt);

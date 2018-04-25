@@ -365,3 +365,37 @@ textarea {
     font-family: 'Times New Roman', Times, serif;
     letter-spacing: 1px;
 }
+
+/*************************************/
+
+select {
+    outline: none;
+    font-size: 14px;
+    border: none;
+    background: white;
+    width: 50%;
+    background-color: rgba(0, 0, 0, 0.05);
+    font-family: 'Times New Roman', Times, serif;
+    letter-spacing: 1px;
+    padding: 12px 20px 12px 40px;
+}
+
+/****************************/
+.cardi2q {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 18%;
+    text-align: center;
+    font-family: arial;
+    display: inline-block;
+
+    /*margin: auto;*/
+}
+
+.cardhiddenModq {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 27%;
+    margin-left: 12%;
+    margin-right: auto;
+    text-align: center;
+    /*margin: auto;*/
+}

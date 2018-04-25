@@ -14,4 +14,6 @@ public interface IQuestionService {
     Boolean deleteQs(Question idQs);
 
     Boolean updateQs(Question idQs);
+
+    int mexIdQuestion(int idCnt);
 }

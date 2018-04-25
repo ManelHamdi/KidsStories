@@ -73,21 +73,23 @@
                 </div>
 
 
+                <!-- ************************ Liste question **************-->
                 <div th:each="lstQs: ${lstQs}">
                     <div class="w3-content"
                          th:if="${lstQs.getMediasceneByIdMediascene().getIdMediascene()==lstMs.idMediascene}">
 
                         <div class="mySlides">
                             <!-- **************** titre ************* -->
-                            <h5 th:text="' Question: ' + ${lstQs.titre}">question</h5>
+                            <h5 style="margin: 5px" th:text="' Question: ' + ${lstQs.titre}">question</h5>
                             <!-- **************** image *************** -->
                             <img th:src="@{'data:image/jpg;base64,' +
             *{T(org.springframework.util.Base64Utils).encodeToString(lstQs.image)}}" style="width:70%">
-                            <!-- ***************** Audio ************** -->
-                            <h5 th:text="'Categories ' + ${lstQs.getCategoriesByIdCategories().getTypeCategories()}">
-                                Categories</h5>
-                            <!-- **************** Texte *************** -->
-                            <h5 th:text="'Reponse: ' + ${lstQs.reponse}">reponse</h5>
+
+                            <div th:each="crep: ${lstQs.getReponsesByIdQuestion()}">
+                                <h5 style="margin: 5px" th:text="'1) ' + ${crep.getTexteReponse1()}"></h5>
+                                <h5 style="margin: 5px" th:text="'2) ' + ${crep.getTexteReponse2()}"></h5>
+                                <h5 style="margin: 5px" th:text="'3) ' + ${crep.getTexteReponse3()}"></h5>
+                            </div>
 
                             <br/>
                         </div>
