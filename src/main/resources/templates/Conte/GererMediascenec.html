@@ -66,9 +66,9 @@
 
 </head>
 <body class="body2" id="body">
-<table width="100%" style="float: left">
+<table width="40%" style="float: left">
     <tr>
-        <td width="40%">
+        <td>
             <!-- ******************* Logo ************** -->
             <form action="/GererConte" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="idAdmin" th:value="${idAdmin}">
@@ -81,7 +81,7 @@
         </td>
     </tr>
     <tr>
-        <td width="40%">
+        <td>
             <!-- ************************ Conte ******************** -->
             <div class="cardt">
                 <img th:src="@{'data:image/jpg;base64,' +
@@ -103,40 +103,11 @@
             </div>
 
         </td>
-        <td>
-            <div class="cardhidden2c" id="ch">
-                <form action="/GererMs" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="idAdmin" th:value="${idAdmin}">
-                    <input type="hidden" name="idConte" th:value="${idConte}">
-
-                    Choisir un image
-                    <input placeholder="Image" name="imgPage" type="file" required="">
-                    <br/><br/>
-                    Choisir un fichier audio
-                    <input placeholder="Audio" name="audioPage" type="file" required="">
-                    <br/><br/>
-                    <textarea id="textAreaRc" style="height:60px;" placeholder="Texte" name="txtPage" type="text"
-                              required=""></textarea>
-                    <i>Ou <input id="idFiletxtc" placeholder="Texte" name="textePage" type="file"
-                                 onclick="ReadFromTxtc()"></i>
-                    <br/>
-                    <h3 th:text="${Erreur}" style="color:red"></h3>
-
-                    <input class="btnVm" type="submit" name="ajouterMss" value="Suivant">
-                    <input class="btnRm" type="reset" name="suivant" value="réinitialiser"><br/>
-                    <input class="btnVs" type="submit" name="ajouterMs" value="Terminer">
-                </form>
-            </div>
-
-        </td>
     </tr>
 </table>
 
 <h3 th:text="${Erreur}" style="color:red"></h3>
-<!-- ************** creation de Mediascene *************** -->
 
-
-<br/><br/>
 
 <!-- ************************ Liste MediaScene ******************** -->
 
@@ -173,7 +144,31 @@
         </form>
     </div>
 </div>
+<!-- ************** creation de Mediascene *************** -->
 
+<div class="cardhidden2cmc" id="ch">
+    <form action="/GererMs" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="idAdmin" th:value="${idAdmin}">
+        <input type="hidden" name="idConte" th:value="${idConte}">
+
+        Image
+        <input placeholder="Image" name="imgPage" type="file" required="">
+        <br/><br/>
+        Audio
+        <input placeholder="Audio" name="audioPage" type="file" required="">
+        <br/><br/>
+        <textarea id="textAreaRc" style="height:60px;" placeholder="Texte" name="txtPage" type="text"
+                  required=""></textarea>
+        <i>Ou <input id="idFiletxtc" placeholder="Texte" name="textePage" type="file" onclick="ReadFromTxtc()"></i>
+        <br/>
+        <h3 th:text="${Erreur}" style="color:red"></h3>
+
+        <input class="btnVm" type="submit" name="ajouterMss" value="Suivant">
+        <input class="btnRm" type="reset" name="suivant" value="réinitialiser"><br/>
+        <input class="btnVs" type="submit" name="ajouterMs" value="Terminer">
+    </form>
+</div>
+<br/><br/>
 
 </body>
 </html>

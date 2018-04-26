@@ -110,15 +110,15 @@
 <!-- ************** creation de Mediascene *************** -->
 
 
-<div class="cardhidden2" id="ch">
+<div class="cardhidden2cm" id="ch">
     <form action="/GererMs" method="post" enctype="multipart/form-data">
         <input type="hidden" name="idAdmin" th:value="${idAdmin}">
         <input type="hidden" name="idConte" th:value="${idConte}">
 
-        Choisir un image
+        Image
         <input placeholder="Image" name="imgPage" type="file" required="">
         <br/><br/>
-        Choisir un fichier audio
+        Audio
         <input placeholder="Audio" name="audioPage" type="file" required="">
         <br/><br/>
         <textarea id="textAreaRc" style="height:60px;" placeholder="Texte" name="txtPage" type="text"
