@@ -9,6 +9,8 @@ import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ReponseService implements IReponseService {
 
@@ -65,5 +67,10 @@ public class ReponseService implements IReponseService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public List<Reponse> lstRep() {
+        return iReponseDAO.findAll();
     }
 }
