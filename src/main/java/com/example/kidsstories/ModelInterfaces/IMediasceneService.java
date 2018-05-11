@@ -19,4 +19,8 @@ public interface IMediasceneService {
     Boolean updateMs(Mediascene mediascene);
 
     Boolean ifMeds(int idcnt);
+
+    List<Mediascene> ListMsLimited(int idCnt, int idms);
+
+    int maxMs(int idCnt);
 }

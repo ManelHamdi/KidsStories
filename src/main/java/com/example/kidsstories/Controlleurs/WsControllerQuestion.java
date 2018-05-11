@@ -32,10 +32,31 @@ public class WsControllerQuestion {
         }
     }
 
+    @RequestMapping(value = "/lQs/{idConte}/{idMs}", method = RequestMethod.GET, produces = "application/json")
+    public Question qscntMs(@PathVariable("idConte") int idConte,
+                            @PathVariable("idMs") int idMs) {
+        try {
+            return iQuestionService.qsbyCntMs(idConte, idMs);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     @RequestMapping(value = "/Rs", method = RequestMethod.GET, produces = "application/json")
     public List<Reponse> lstRs() {
         try {
             return iReponseService.lstRep();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @RequestMapping(value = "/Rs/{idQs}", method = RequestMethod.GET, produces = "application/json")
+    public Reponse repbyQs(@PathVariable("idQs") int idQs) {
+        try {
+            return iReponseService.findRbyIdQ(idQs);
         } catch (Exception e) {
             e.printStackTrace();
             return null;

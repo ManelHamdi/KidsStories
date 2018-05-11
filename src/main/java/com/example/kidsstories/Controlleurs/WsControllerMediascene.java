@@ -26,4 +26,26 @@ public class WsControllerMediascene {
             return null;
         }
     }
+
+    @RequestMapping(value = "/allMsl/{idConte}/{idMs}", method = RequestMethod.GET, produces = "application/json")
+    public List<Mediascene> lstMsL(@PathVariable("idConte") int idConte,
+                                   @PathVariable("idMs") int idMs) {
+        try {
+            return iMediasceneService.ListMsLimited(idConte, idMs);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @RequestMapping(value = "/maxMs/{idConte}", method = RequestMethod.GET, produces = "application/json")
+    public int maxMs(@PathVariable("idConte") int idConte) {
+        try {
+            return iMediasceneService.maxMs(idConte);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
 }

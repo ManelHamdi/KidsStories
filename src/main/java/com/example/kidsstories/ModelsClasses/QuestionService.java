@@ -83,4 +83,17 @@ public class QuestionService implements IQuestionService {
         }
         return results;
     }
+
+    @Override
+    public Question qsbyCntMs(int idConte, int idMs) {
+        Question results = null;
+        try {
+            Session session = sessionFactory.openSession();
+            results = (Question) session.createQuery("from Question q where q.idConte = " + idConte + " and q.idMediascene = " + idMs).uniqueResult();
+            session.close();
+        } catch (Exception ex) {
+            System.err.println("Erreur Dans question dao find q : \n" + ex.getMessage());
+        }
+        return results;
+    }
 }

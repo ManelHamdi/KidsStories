@@ -99,4 +99,27 @@ public class MediasceneService implements IMediasceneService {
         }
         return results > 0;
     }
+
+    @Override
+    public List<Mediascene> ListMsLimited(int idCnt, int idms) {
+        List<Mediascene> results = null;
+        try {
+            Session session = sessionFactory.openSession();
+            results = session.createQuery("from Mediascene m where m.idMediascene >= " + idms + " and m.idConte = " + idCnt).list();
+            session.close();
+        } catch (Exception ex) {
+            System.err.println("Erreur Dans mediascene dao find all ms by idcnt : \n" + ex.getMessage());
+        }
+        return results;
+    }
+
+    @Override
+    public int maxMs(int idCnt) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        int num = (int) session.createQuery("SELECT  max(idMediascene) FROM Mediascene where idConte = " + idCnt).setMaxResults(1).uniqueResult();
+        session.getTransaction().commit();
+        return num;
+    }
+
 }
